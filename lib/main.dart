@@ -1,3 +1,4 @@
+import 'package:appetec/views/enter_device_page.dart';
 import 'package:appetec/views/login_page.dart';
 import 'package:appetec/views/profile_setup_page.dart';
 import 'package:appetec/views/register_page.dart';
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Appetec", theme: ThemeData(), home: ProfileSetupPage());
+      title: "Appetec",
+      theme: ThemeData(),
+      home: LoginPage(),
+    );
   }
 }

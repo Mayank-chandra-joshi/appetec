@@ -1,12 +1,14 @@
 import 'package:appetec/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class PasswordInputWidget extends StatelessWidget {
+class NumberInputWidget extends StatelessWidget {
   final TextEditingController controller;
   final String? placeholder;
   final String? Function(String?)? validator;
 
-  const PasswordInputWidget({
+  const NumberInputWidget({
     super.key,
     required this.controller,
     this.placeholder,
@@ -17,8 +19,15 @@ class PasswordInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      obscureText: true,
       validator: validator,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
+      keyboardType: TextInputType.number,
+      style: GoogleFonts.exo2(
+        color: black,
+        fontSize: 16,
+      ),
       decoration: InputDecoration(
         hintText: placeholder,
         isDense: true,

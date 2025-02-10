@@ -1,12 +1,12 @@
 import 'package:appetec/constants/colors.dart';
 import 'package:appetec/utils/degreeToRadians.dart';
-import 'package:appetec/widgets/forms/profile_setup_form_widget.dart';
+import 'package:appetec/widgets/forms/goals_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileSetupPage extends StatelessWidget {
+class GoalsPage extends StatelessWidget {
   final username = "Mayank";
-  const ProfileSetupPage({super.key});
+  const GoalsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,36 +31,35 @@ class ProfileSetupPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Welcome $username!",
-                          style: GoogleFonts.exo(
-                            fontSize: 32,
-                            color: white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * .68,
-                          ),
-                          child: Text(
-                            "Please provide some information to get started.",
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Welcome $username!",
                             style: GoogleFonts.exo(
-                              fontSize: 17,
+                              fontSize: 32,
                               color: white,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w700,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                        )
-                      ],
-                    ),
-                  ),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * .68,
+                            ),
+                            child: Text(
+                              "Please provide some information to get started.",
+                              style: GoogleFonts.exo(
+                                fontSize: 17,
+                                color: white,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      )),
                 ],
               ),
             ),
@@ -95,15 +94,12 @@ class ProfileSetupPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 44.0,
-                      horizontal: 24,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(24, 48, 24, 0),
                     child: Column(
                       spacing: 28,
                       children: [
                         Text(
-                          "Profile Setup",
+                          "Goals",
                           style: GoogleFonts.exo(
                             fontSize: 28,
                             fontWeight: FontWeight.w600,
@@ -111,7 +107,7 @@ class ProfileSetupPage extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: ProfileSetupForm(),
+                          child: GoalsSetupForm(),
                         )
                       ],
                     ),
