@@ -12,6 +12,8 @@ class DeviceCard extends StatelessWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: white,
+          shadowColor: darkGreen,
+          elevation: 10,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
           ),

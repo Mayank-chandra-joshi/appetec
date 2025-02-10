@@ -1,4 +1,7 @@
+import 'package:appetec/constants/colors.dart';
+import 'package:appetec/widgets/forms/add_device_form.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EnterDevicePage extends StatelessWidget {
   const EnterDevicePage({super.key});
@@ -10,7 +13,29 @@ class EnterDevicePage extends StatelessWidget {
       body: Stack(
         children: [
           Expanded(
-            child: Center(),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              color: white,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Enter your device",
+                      style: GoogleFonts.exo(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                        color: black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    AddDeviceForm(),
+                  ],
+                ),
+              ),
+            ),
           ),
           Positioned(
             top: -50,

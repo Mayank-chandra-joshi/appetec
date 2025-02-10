@@ -2,7 +2,7 @@ import 'package:appetec/constants/colors.dart';
 import 'package:appetec/types/Device/DeviceDetails.dart';
 import 'package:appetec/utils/degreeToRadians.dart';
 import 'package:appetec/widgets/bottons/simple_button.dart';
-import 'package:appetec/widgets/device_card.dart';
+import 'package:appetec/widgets/cards/device_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

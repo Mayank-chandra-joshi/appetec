@@ -107,45 +107,7 @@ class LoginPage extends StatelessWidget {
                             color: black,
                           ),
                         ),
-                        Column(
-                          spacing: 56,
-                          children: [
-                            LoginForm(),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * .75,
-                              child: Column(
-                                spacing: 16,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  LogoBtn(
-                                    text: 'Continue with Apple',
-                                    logo: Icons.apple,
-                                    onPressed: () {},
-                                    color: white,
-                                    bgcolor: primaryPurple,
-                                    frcolor: lightPurple,
-                                  ),
-                                  LogoBtn(
-                                    text: 'Continue with Google',
-                                    logo: Icons.apple,
-                                    onPressed: () {},
-                                    color: white,
-                                    bgcolor: primaryPurple,
-                                    frcolor: lightPurple,
-                                  ),
-                                  LogoBtn(
-                                    text: 'Continue with Facebook',
-                                    logo: Icons.apple,
-                                    onPressed: () {},
-                                    color: white,
-                                    bgcolor: primaryPurple,
-                                    frcolor: lightPurple,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        LoginForm(),
                       ],
                     ),
                   ),

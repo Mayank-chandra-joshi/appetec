@@ -1,7 +1,10 @@
 import 'package:appetec/constants/colors.dart';
+import 'package:appetec/router/path_constants.dart';
+import 'package:appetec/widgets/bottons/logo_button.dart';
 import 'package:appetec/widgets/input_fields/email_input_widget.dart';
 import 'package:appetec/widgets/input_fields/password_input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:appetec/widgets/bottons/simple_button.dart';
 
@@ -101,7 +104,11 @@ class LoginFormState extends State<LoginForm> {
                 ),
                 SimpleBtn(
                   text: "Register",
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context).pushNamed(
+                      AppRouteConstants.REGISTER_USER,
+                    );
+                  },
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -109,7 +116,43 @@ class LoginFormState extends State<LoginForm> {
                 ),
               ],
             ),
-          )
+          ),
+          SizedBox(
+            height: 56,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .75,
+            child: Column(
+              spacing: 16,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LogoBtn(
+                  text: 'Continue with Apple',
+                  logo: Icons.apple,
+                  onPressed: () {},
+                  color: white,
+                  bgcolor: primaryPurple,
+                  frcolor: lightPurple,
+                ),
+                LogoBtn(
+                  text: 'Continue with Google',
+                  logo: Icons.apple,
+                  onPressed: () {},
+                  color: white,
+                  bgcolor: primaryPurple,
+                  frcolor: lightPurple,
+                ),
+                LogoBtn(
+                  text: 'Continue with Facebook',
+                  logo: Icons.apple,
+                  onPressed: () {},
+                  color: white,
+                  bgcolor: primaryPurple,
+                  frcolor: lightPurple,
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
