@@ -16,23 +16,23 @@ class RegisterPage extends StatelessWidget {
           vertical: 36.0,
           horizontal: 20,
         ),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 40,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Text("Register",
-                    style: GoogleFonts.exo(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: white,
-                    )),
-              ),
-              UserRegisterForm(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Make sure this is defined
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text("Register",
+                  style: GoogleFonts.exo(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: white,
+                  )),
+            ),
+            const SizedBox(height: 40), // Provide spacing
+            UserRegisterForm(),
+          ],
         ),
       ),
     );

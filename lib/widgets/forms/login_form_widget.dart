@@ -22,6 +22,7 @@ class LoginFormState extends State<LoginForm> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isSubmittingForm = false;
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -43,10 +44,23 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _submitForm() {
+    setState(() {
+      _isSubmittingForm = true;
+    });
     if (_formKey.currentState!.validate()) {
-      String email = _emailController.text.trim();
-      String password = _passwordController.text.trim();
+      // String email = _emailController.text.trim();
+      // String password = _passwordController.text.trim();
+      setState(() {
+        _isSubmittingForm = false;
+      });
     } else {}
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -60,7 +74,7 @@ class LoginFormState extends State<LoginForm> {
             placeholder: "Email",
             validator: validateEmail,
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           PasswordInputWidget(
@@ -72,7 +86,7 @@ class LoginFormState extends State<LoginForm> {
             heightFactor: .8,
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () {},
+              onPressed: _isSubmittingForm ? () {} : () {},
               child: Text(
                 "Forgot Password?",
                 style: GoogleFonts.exo(
@@ -86,7 +100,7 @@ class LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           SizedBox(
@@ -96,7 +110,7 @@ class LoginFormState extends State<LoginForm> {
               children: [
                 SimpleBtn(
                   text: "Log In",
-                  onPressed: _submitForm,
+                  onPressed: _isSubmittingForm ? () {} : _submitForm,
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -104,11 +118,13 @@ class LoginFormState extends State<LoginForm> {
                 ),
                 SimpleBtn(
                   text: "Register",
-                  onPressed: () {
-                    GoRouter.of(context).pushNamed(
-                      AppRouteConstants.REGISTER_USER,
-                    );
-                  },
+                  onPressed: _isSubmittingForm
+                      ? () {}
+                      : () {
+                          GoRouter.of(context).pushNamed(
+                            AppRouteConstants.REGISTER_USER,
+                          );
+                        },
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -117,7 +133,7 @@ class LoginFormState extends State<LoginForm> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 56,
           ),
           SizedBox(
@@ -129,7 +145,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Apple',
                   logo: Icons.apple,
-                  onPressed: () {},
+                  onPressed: _isSubmittingForm ? () {} : () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,
@@ -137,7 +153,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Google',
                   logo: Icons.apple,
-                  onPressed: () {},
+                  onPressed: _isSubmittingForm ? () {} : () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,
@@ -145,7 +161,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Facebook',
                   logo: Icons.apple,
-                  onPressed: () {},
+                  onPressed: _isSubmittingForm ? () {} : () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,

@@ -1,4 +1,7 @@
 import 'package:appetec/router/path_constants.dart';
+import 'package:appetec/router/transitions/fade_page_transition.dart';
+import 'package:appetec/router/transitions/scale_page_transition.dart';
+import 'package:appetec/router/transitions/slide_from_right_page_transition.dart';
 import 'package:appetec/views/enter_device_page.dart';
 import 'package:appetec/views/error_page.dart';
 import 'package:appetec/views/get_app_permission_page.dart';
@@ -17,37 +20,62 @@ class AppRouter {
       GoRoute(
         name: AppRouteConstants.LOGIN_USER,
         path: '/auth/login',
-        builder: (context, state) => LoginPage(),
+        pageBuilder: (context, state) {
+          return ScaleTransitionPage(
+            key: state.pageKey,
+            child: const LoginPage(),
+          );
+        },
       ),
       GoRoute(
         name: AppRouteConstants.REGISTER_USER,
         path: '/auth/register',
-        builder: (context, state) => RegisterPage(),
+        pageBuilder: (context, state) {
+          return RightSlideIn(
+            key: state.pageKey,
+            child: RegisterPage(),
+          );
+        },
       ),
       GoRoute(
         name: AppRouteConstants.PROFILE_SETUP,
         path: '/auth/profile',
-        builder: (context, state) => ProfileSetupPage(),
+        pageBuilder: (context, state) => RightSlideIn(
+          key: state.pageKey,
+          child: ProfileSetupPage(),
+        ),
       ),
       GoRoute(
         name: AppRouteConstants.SET_GOALS,
         path: '/auth/goals',
-        builder: (context, state) => GoalsPage(),
+        pageBuilder: (context, state) => RightSlideIn(
+          key: state.pageKey,
+          child: GoalsPage(),
+        ),
       ),
       GoRoute(
         name: AppRouteConstants.SELECT_DEVICE,
         path: '/devices',
-        builder: (context, state) => SelectDevicePage(),
+        pageBuilder: (context, state) => RightSlideIn(
+          key: state.pageKey,
+          child: SelectDevicePage(),
+        ),
       ),
       GoRoute(
         name: AppRouteConstants.ADD_DEVICE,
         path: '/add/device',
-        builder: (context, state) => EnterDevicePage(),
+        pageBuilder: (context, state) => RightSlideIn(
+          key: state.pageKey,
+          child: EnterDevicePage(),
+        ),
       ),
       GoRoute(
         name: AppRouteConstants.GET_APP_PERMISSIONS,
         path: '/get/app_permissions',
-        builder: (context, state) => GetAppPermissionsPage(),
+        pageBuilder: (context, state) => RightSlideIn(
+          key: state.pageKey,
+          child: GetAppPermissionsPage(),
+        ),
       ),
     ],
     errorPageBuilder: (context, state) {

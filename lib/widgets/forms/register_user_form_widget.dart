@@ -4,6 +4,7 @@ import 'package:appetec/widgets/input_fields/email_input_widget.dart';
 import 'package:appetec/widgets/input_fields/password_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:appetec/widgets/bottons/simple_button.dart';
+import 'package:go_router/go_router.dart';
 
 class UserRegisterForm extends StatefulWidget {
   const UserRegisterForm({super.key});
@@ -44,7 +45,7 @@ class UserRegisterFormState extends State<UserRegisterForm> {
 
   String? validateConfirmPassword(String? value) {
     if (value != _passwordController.text.trim()) {
-      return "Password and Confrim Password doesn't match";
+      return "Password and Confirm Password doesn't match";
     }
     return null;
   }
@@ -62,6 +63,14 @@ class UserRegisterFormState extends State<UserRegisterForm> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -72,7 +81,7 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             placeholder: "Email",
             validator: validateEmail,
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           PasswordInputWidget(
@@ -80,7 +89,7 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             placeholder: "Create Password",
             validator: validatePassword,
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           PasswordInputWidget(
@@ -88,7 +97,7 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             placeholder: "Confrim Password",
             validator: validateConfirmPassword,
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           TextCheckBox(
@@ -96,7 +105,7 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             label: "I agree to Appetech's Terms & Conditions & Privacy Policy.",
             validator: validateAcceptedTandC,
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           Row(
@@ -104,7 +113,9 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             children: [
               SimpleBtn(
                 text: "Back",
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
                 width: 120,
                 color: primaryPurple,
                 bgcolor: lightGreen,

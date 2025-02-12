@@ -25,26 +25,6 @@ class LoginPage extends StatelessWidget {
                   height: 90,
                   fit: BoxFit.fill,
                 ),
-                // child: Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Icon(
-                //       Icons.bolt,
-                //       color: whiteColor,
-                //       size: 40.0,
-                //     ),
-                //     Text(
-                //       "appetec",
-                //       style: GoogleFonts.exo(
-                //           fontSize: 32,
-                //           fontWeight: FontWeight.bold,
-                //           color: whiteColor,
-                //           decoration: TextDecoration.underline,
-                //           decorationColor: whiteColor,
-                //           decorationThickness: 2.0),
-                //     )
-                //   ],
-                // ),
               ),
             ),
             Container(
