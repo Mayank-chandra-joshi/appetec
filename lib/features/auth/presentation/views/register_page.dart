@@ -1,5 +1,5 @@
 import 'package:appetec/core/theme/colors.dart';
-import 'package:appetec/features/auth/presentation/widgets/register_user_form_widget.dart';
+import 'package:appetec/features/auth/presentation/widgets/forms/register_user_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

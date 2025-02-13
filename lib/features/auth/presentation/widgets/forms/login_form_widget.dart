@@ -1,9 +1,11 @@
 import 'package:appetec/core/theme/colors.dart';
+import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/router/path_constants.dart';
 import 'package:appetec/core/common/bottons/logo_button.dart';
 import 'package:appetec/core/common/input_fields/email_input_widget.dart';
 import 'package:appetec/core/common/input_fields/password_input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
@@ -43,13 +45,17 @@ class LoginFormState extends State<LoginForm> {
     return null;
   }
 
-  void _submitForm() {
+  void _submitForm(BuildContext context) {
     setState(() {
       _isSubmittingForm = true;
     });
     if (_formKey.currentState!.validate()) {
-      // String email = _emailController.text.trim();
-      // String password = _passwordController.text.trim();
+      context.read<AuthBloc>().add(
+            AuthLogin(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            ),
+          );
     }
 
     setState(() {
@@ -111,7 +117,8 @@ class LoginFormState extends State<LoginForm> {
               children: [
                 SimpleBtn(
                   text: "Log In",
-                  onPressed: _isSubmittingForm ? () {} : _submitForm,
+                  onPressed:
+                      _isSubmittingForm ? () {} : () => _submitForm(context),
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,

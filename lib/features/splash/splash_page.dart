@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 3));
     // Using GoRouter to navigate to the home route
     if (mounted) {
-      context.go('/auth/login');
+      context.go('/');
     }
   }
 

@@ -32,6 +32,8 @@ class AuthRemoteSourceImp implements AuthRemoteSource {
         final String responseBody =
             await response.transform(utf8.decoder).join();
         final Map<String, dynamic> jsonData = jsonDecode(responseBody);
+
+        print(responseBody);
         return UserModel.fromJson(jsonData);
       } else {
         throw HttpException(
