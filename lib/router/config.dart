@@ -1,22 +1,32 @@
+import 'package:appetec/features/splash/splash_page.dart';
 import 'package:appetec/router/path_constants.dart';
-import 'package:appetec/router/transitions/fade_page_transition.dart';
 import 'package:appetec/router/transitions/scale_page_transition.dart';
 import 'package:appetec/router/transitions/slide_from_right_page_transition.dart';
-import 'package:appetec/views/enter_device_page.dart';
-import 'package:appetec/views/error_page.dart';
-import 'package:appetec/views/get_app_permission_page.dart';
-import 'package:appetec/views/login_page.dart';
-import 'package:appetec/views/register_page.dart';
+import 'package:appetec/features/onboarding/presentation/views/pair_device_page.dart';
+import 'package:appetec/features/error_page.dart';
+import 'package:appetec/features/onboarding/presentation/views/get_app_permission_page.dart';
+import 'package:appetec/features/auth/presentation/views/login_page.dart';
+import 'package:appetec/features/auth/presentation/views/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:appetec/views/profile_setup_page.dart';
-import 'package:appetec/views/goals_page.dart';
-import 'package:appetec/views/select_device_page.dart';
+import 'package:appetec/features/onboarding/presentation/views/profile_setup_page.dart';
+import 'package:appetec/features/onboarding/presentation/views/goals_page.dart';
+import 'package:appetec/features/onboarding/presentation/views/select_device_page.dart';
 
 class AppRouter {
   GoRouter router = GoRouter(
-    initialLocation: '/auth/login',
+    initialLocation: '/splash',
     routes: [
+      GoRoute(
+        name: AppRouteConstants.SPLASH,
+        path: '/splash',
+        pageBuilder: (context, state) {
+          return ScaleTransitionPage(
+            key: state.pageKey,
+            child: const SplashPage(),
+          );
+        },
+      ),
       GoRoute(
         name: AppRouteConstants.LOGIN_USER,
         path: '/auth/login',
@@ -39,7 +49,7 @@ class AppRouter {
       ),
       GoRoute(
         name: AppRouteConstants.PROFILE_SETUP,
-        path: '/auth/profile',
+        path: '/onboarding/profile',
         pageBuilder: (context, state) => RightSlideIn(
           key: state.pageKey,
           child: ProfileSetupPage(),
@@ -47,7 +57,7 @@ class AppRouter {
       ),
       GoRoute(
         name: AppRouteConstants.SET_GOALS,
-        path: '/auth/goals',
+        path: '/onboarding/goals',
         pageBuilder: (context, state) => RightSlideIn(
           key: state.pageKey,
           child: GoalsPage(),
@@ -55,7 +65,7 @@ class AppRouter {
       ),
       GoRoute(
         name: AppRouteConstants.SELECT_DEVICE,
-        path: '/devices',
+        path: '/onboarding/devices',
         pageBuilder: (context, state) => RightSlideIn(
           key: state.pageKey,
           child: SelectDevicePage(),
@@ -63,15 +73,15 @@ class AppRouter {
       ),
       GoRoute(
         name: AppRouteConstants.ADD_DEVICE,
-        path: '/add/device',
+        path: '/onboarding/pair/device/:id',
         pageBuilder: (context, state) => RightSlideIn(
           key: state.pageKey,
-          child: EnterDevicePage(),
+          child: PairDevicePage(),
         ),
       ),
       GoRoute(
         name: AppRouteConstants.GET_APP_PERMISSIONS,
-        path: '/get/app_permissions',
+        path: '/onboarding/get/app_permissions',
         pageBuilder: (context, state) => RightSlideIn(
           key: state.pageKey,
           child: GetAppPermissionsPage(),

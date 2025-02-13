@@ -1,4 +1,5 @@
 class AppRouteConstants {
+  static const SPLASH = 'splash';
   static const LOGIN_USER = "login";
   static const REGISTER_USER = 'register';
   static const PROFILE_SETUP = 'profile';
