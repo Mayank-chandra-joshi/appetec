@@ -24,7 +24,6 @@ class LoginFormState extends State<LoginForm> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isSubmittingForm = false;
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -46,10 +45,14 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _submitForm(BuildContext context) {
-    setState(() {
-      _isSubmittingForm = true;
-    });
     if (_formKey.currentState!.validate()) {
+      showDialog(
+        context: context,
+        barrierDismissible: false, // Prevent dismissing
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
       context.read<AuthBloc>().add(
             AuthLogin(
               email: _emailController.text.trim(),
@@ -57,10 +60,6 @@ class LoginFormState extends State<LoginForm> {
             ),
           );
     }
-
-    setState(() {
-      _isSubmittingForm = false;
-    });
   }
 
   @override
@@ -93,7 +92,7 @@ class LoginFormState extends State<LoginForm> {
             heightFactor: .8,
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: _isSubmittingForm ? () {} : () {},
+              onPressed: () {},
               child: Text(
                 "Forgot Password?",
                 style: GoogleFonts.exo(
@@ -117,8 +116,7 @@ class LoginFormState extends State<LoginForm> {
               children: [
                 SimpleBtn(
                   text: "Log In",
-                  onPressed:
-                      _isSubmittingForm ? () {} : () => _submitForm(context),
+                  onPressed: () => _submitForm(context),
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -126,13 +124,11 @@ class LoginFormState extends State<LoginForm> {
                 ),
                 SimpleBtn(
                   text: "Register",
-                  onPressed: _isSubmittingForm
-                      ? () {}
-                      : () {
-                          GoRouter.of(context).pushNamed(
-                            AppRouteConstants.REGISTER_USER,
-                          );
-                        },
+                  onPressed: () {
+                    GoRouter.of(context).pushNamed(
+                      AppRouteConstants.REGISTER_USER,
+                    );
+                  },
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -153,7 +149,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Apple',
                   logo: Icons.apple,
-                  onPressed: _isSubmittingForm ? () {} : () {},
+                  onPressed: () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,
@@ -161,7 +157,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Google',
                   logo: Icons.apple,
-                  onPressed: _isSubmittingForm ? () {} : () {},
+                  onPressed: () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,
@@ -169,7 +165,7 @@ class LoginFormState extends State<LoginForm> {
                 LogoBtn(
                   text: 'Continue with Facebook',
                   logo: Icons.apple,
-                  onPressed: _isSubmittingForm ? () {} : () {},
+                  onPressed: () {},
                   color: white,
                   bgcolor: primaryPurple,
                   frcolor: lightPurple,

@@ -1,4 +1,5 @@
 import 'package:appetec/features/auth/domain/entities/user.dart';
+import 'package:flutter/material.dart';
 
 class UserModel extends User {
   final String accessToken;
@@ -41,7 +42,11 @@ class UserModel extends User {
       isAccountCompleted: user['isAccountCompleted'],
       isDeleted: user['isDeleted'],
       appPermissions: List<String>.from(user['app_permissions']),
-      goals: List<Map<String, String>>.from(user['goals']),
+      goals: List<Map<String, String>>.from(user['goals'].map((goal) => {
+            'id': goal['id'] as String,
+            'goal_type': goal['goal_type'] as String,
+            'selected_goal': goal['selected_goal'] as String,
+          })),
     );
   }
 }

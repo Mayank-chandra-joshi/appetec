@@ -3,8 +3,10 @@ import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/core/common/input_fields/checkbox_with_text.dart';
 import 'package:appetec/core/common/input_fields/email_input_widget.dart';
 import 'package:appetec/core/common/input_fields/password_input_widget.dart';
+import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class UserRegisterForm extends StatefulWidget {
@@ -25,8 +27,6 @@ class UserRegisterFormState extends State<UserRegisterForm> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool hasAcceptedTandC = false;
-
-  bool _isSubmittingForm = false;
 
   String? validateName(String? value) {
     if (value == null || value.isEmpty) {
@@ -66,17 +66,32 @@ class UserRegisterFormState extends State<UserRegisterForm> {
     if (value == null || !value) {
       return "";
     }
+
+    setState(() {
+      hasAcceptedTandC = true;
+    });
     return null;
   }
 
-  void _submitForm() {
-    setState(() {
-      _isSubmittingForm = true;
-    });
-    if (_formKey.currentState!.validate()) {}
-    setState(() {
-      _isSubmittingForm = false;
-    });
+  void _submitForm(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+      context.read<AuthBloc>().add(
+            AuthRegister(
+              name: _nameController.text.trim(),
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+              confirmPassword: _confirmPasswordController.text.trim(),
+              acceptTerms: hasAcceptedTandC,
+            ),
+          );
+    }
   }
 
   @override
@@ -138,18 +153,16 @@ class UserRegisterFormState extends State<UserRegisterForm> {
             children: [
               SimpleBtn(
                 text: "Back",
-                onPressed: _isSubmittingForm
-                    ? () {}
-                    : () {
-                        GoRouter.of(context).pop();
-                      },
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
                 width: 120,
                 color: primaryPurple,
                 bgcolor: lightGreen,
               ),
               SimpleBtn(
                 text: "Register",
-                onPressed: _submitForm,
+                onPressed: () => _submitForm(context),
                 width: 120,
                 color: primaryPurple,
                 bgcolor: lightGreen,

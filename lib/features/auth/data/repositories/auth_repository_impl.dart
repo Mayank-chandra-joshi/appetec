@@ -30,4 +30,36 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> registerWithEmailPassword({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required bool acceptTerms,
+  }) async {
+    try {
+      final res = await authRemoteSource.registerWithEmailPassword(
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+        acceptTerms: acceptTerms,
+      );
+      return right(res);
+    } catch (e) {
+      return left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> logoutUser() async {
+    try {
+      final message = await authRemoteSource.logoutUser();
+      return right(message);
+    } catch (e) {
+      return left(Failure(message: e.toString()));
+    }
+  }
 }

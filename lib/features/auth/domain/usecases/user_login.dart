@@ -22,6 +22,16 @@ class UserLogin implements UseCase<User, UserLoginParams> {
   }
 }
 
+class UserLogout implements UseCaseNoParams<String> {
+  final AuthRepository authRepository;
+  UserLogout(this.authRepository);
+
+  @override
+  Future<Either<Failure, String>> call() async {
+    return await authRepository.logoutUser();
+  }
+}
+
 class UserLoginParams {
   final String email;
   final String password;

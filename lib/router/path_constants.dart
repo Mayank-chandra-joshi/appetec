@@ -7,4 +7,5 @@ class AppRouteConstants {
   static const SELECT_DEVICE = 'select_device';
   static const ADD_DEVICE = 'add_device';
   static const GET_APP_PERMISSIONS = 'get_app_permissions';
+  static const HOME = 'home';
 }

@@ -7,4 +7,14 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<Failure, String>> registerWithEmailPassword({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required bool acceptTerms,
+  });
+
+  Future<Either<Failure, String>> logoutUser();
 }
