@@ -1,4 +1,5 @@
 import 'package:appetec/core/theme/colors.dart';
+import 'package:appetec/router/path_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 3));
     // Using GoRouter to navigate to the home route
     if (mounted) {
-      context.go('/');
+      context.goNamed(AppRouteConstants.HOME);
     }
   }
 

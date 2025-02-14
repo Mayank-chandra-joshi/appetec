@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             }
 
             if (state is AuthSuccess) {
-              context.goNamed(AppRouteConstants.HOME);
+              context.goNamed(AppRouteConstants.PROFILE_SETUP);
             }
 
             if (state is AuthFailure) {

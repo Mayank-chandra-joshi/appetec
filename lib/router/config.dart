@@ -17,6 +17,21 @@ import 'package:appetec/features/onboarding/presentation/views/goals_page.dart';
 import 'package:appetec/features/onboarding/presentation/views/select_device_page.dart';
 
 class AppRouter {
+  static const List<String> unprotectedRoutes = [
+    AppRouteConstants.SPLASH,
+    AppRouteConstants.LOGIN_USER,
+    AppRouteConstants.REGISTER_USER,
+  ];
+
+  // Only those who have not completed thier profile
+  static const List<String> partiallyProtectedRotues = [
+    AppRouteConstants.PROFILE_SETUP,
+    AppRouteConstants.SET_GOALS,
+    AppRouteConstants.ADD_DEVICE,
+    AppRouteConstants.SELECT_DEVICE,
+    AppRouteConstants.GET_APP_PERMISSIONS
+  ];
+
   GoRouter get router => GoRouter(
         initialLocation: '/splash',
         routes: [
@@ -105,6 +120,15 @@ class AppRouter {
           if ((authState is AuthInitial || authState is AuthFailure) &&
               state.uri.toString() != '/auth/register') {
             return '/auth/login';
+          }
+
+          if (state.uri.toString() == '/onboarding/profile' &&
+              authState.isAccountCompleted) {
+            return '/';
+          }
+
+          if (!authState.isAccountCompleted && authState is AuthSuccess) {
+            return '/onboarding/prorfile';
           }
 
           return null;
