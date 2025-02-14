@@ -1,9 +1,16 @@
+import 'package:appetec/core/constants/backend/url.dart';
 import 'package:appetec/core/theme/colors.dart';
+import 'package:appetec/features/onboarding/data/repositories/device_repository_impl.dart';
+import 'package:appetec/features/onboarding/data/sources/device_remote_source.dart';
+import 'package:appetec/features/onboarding/domain/usecases/get_devices.dart';
 import 'package:appetec/types/Device/DeviceDetails.dart';
 import 'package:appetec/utils/degreeToRadians.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
 import 'package:appetec/core/common/cards/device_card.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SelectDevicePage extends StatelessWidget {
@@ -16,6 +23,19 @@ class SelectDevicePage extends StatelessWidget {
     DeviceItem(id: "5", name: "Mark"),
     DeviceItem(id: "6", name: "Mark"),
   ];
+
+  void fetchDevices(BuildContext context) async {
+    try {
+      final response = await GetDevices(
+              DeviceRepositoryImpl(deviceRemoteSource: DeviceRemoteSourceImp()))
+          .call();
+      response.fold((l) => print(l.message), (r) => print(r));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+  }
 
   const SelectDevicePage({super.key});
 
@@ -86,7 +106,9 @@ class SelectDevicePage extends StatelessWidget {
                       children: [
                         SimpleBtn(
                           text: "Back",
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pop();
+                          },
                           width: 120,
                           color: white,
                           bgcolor: primaryPurple,
@@ -94,7 +116,9 @@ class SelectDevicePage extends StatelessWidget {
                         ),
                         SimpleBtn(
                           text: "Next",
-                          onPressed: () {},
+                          onPressed: () {
+                            fetchDevices(context);
+                          },
                           width: 120,
                           color: white,
                           bgcolor: primaryPurple,

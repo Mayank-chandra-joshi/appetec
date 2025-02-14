@@ -3,9 +3,13 @@ import 'package:appetec/core/theme/colors.dart';
 // import 'package:appetec/widgets/input_fields/dropdown_widget2.dart';
 import 'package:appetec/core/common/input_fields/dropdown_widget3.dart';
 import 'package:appetec/core/common/input_fields/number_input_widget.dart';
+import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:appetec/router/path_constants.dart';
 // import 'package:appetec/widgets/input_fields/save_dropdown_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:flutter_portal/flutter_portal.dart';
 
 class ProfileSetupForm extends StatefulWidget {
@@ -75,10 +79,19 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
     });
   }
 
-  void _submitForm() {
+  void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      String age = _ageController.text.trim();
-    } else {}
+      context.read<OnboardingBloc>().add(
+            UpdateOnboardingEvent(
+                age: int.tryParse(_ageController.text.trim()),
+                height: double.tryParse(_heightController.text.trim()),
+                weight: double.tryParse(_weightController.text.trim()),
+                gender: selectedGender,
+                dietPreference: selectedDieteryPrefrences),
+          );
+
+      context.pushNamed(AppRouteConstants.SET_GOALS);
+    }
   }
 
   @override
@@ -135,7 +148,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                 ),
                 SimpleBtn(
                   text: "Next",
-                  onPressed: _submitForm,
+                  onPressed: () => _submitForm(context),
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,

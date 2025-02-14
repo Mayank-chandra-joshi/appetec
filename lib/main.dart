@@ -1,4 +1,5 @@
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:appetec/init_dependencies.dart';
 import 'package:appetec/router/config.dart';
 import 'package:flutter/foundation.dart';
@@ -17,14 +18,15 @@ void main() async {
         : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
 
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-        create: (_) => serviceLocator<AuthBloc>(),
-      )
-    ],
-    child: MyApp(),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (context) => serviceLocator<OnboardingBloc>()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,14 +34,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        AppRouter().router.refresh();
-      },
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter().router,
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter().router,
     );
   }
 }

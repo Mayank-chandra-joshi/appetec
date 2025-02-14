@@ -117,19 +117,19 @@ class AppRouter {
         redirect: (context, state) {
           final authState = context.read<AuthBloc>().state;
 
-          if ((authState is AuthInitial || authState is AuthFailure) &&
-              state.uri.toString() != '/auth/register') {
-            return '/auth/login';
-          }
+          // if ((authState is AuthInitial || authState is AuthFailure) &&
+          //     state.uri.toString() != '/auth/register') {
+          //   return '/auth/login';
+          // }
 
-          if (state.uri.toString() == '/onboarding/profile' &&
-              authState.isAccountCompleted) {
-            return '/';
-          }
+          // if (state.uri.toString() == '/onboarding/profile' &&
+          //     authState.isAccountCompleted) {
+          //   return '/';
+          // }
 
-          if (!authState.isAccountCompleted && authState is AuthSuccess) {
-            return '/onboarding/prorfile';
-          }
+          // if (!authState.isAccountCompleted && authState is AuthSuccess) {
+          //   return '/onboarding/prorfile';
+          // }
 
           return null;
         },

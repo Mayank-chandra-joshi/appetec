@@ -1,7 +1,11 @@
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/core/common/input_fields/dropdown_widget3.dart';
+import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:appetec/router/path_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class GoalsSetupForm extends StatefulWidget {
   const GoalsSetupForm({super.key});
@@ -70,9 +74,14 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
     });
   }
 
-  void _submitForm() {
+  void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-    } else {}
+      context.read<OnboardingBloc>().add(
+            UpdateOnboardingEvent(),
+          );
+
+      context.pushNamed(AppRouteConstants.SELECT_DEVICE);
+    }
   }
 
   @override
@@ -121,7 +130,9 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               children: [
                 SimpleBtn(
                   text: "Back",
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,
@@ -129,7 +140,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
                 ),
                 SimpleBtn(
                   text: "Next",
-                  onPressed: _submitForm,
+                  onPressed: () => _submitForm(context),
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,

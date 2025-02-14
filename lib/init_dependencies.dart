@@ -4,12 +4,14 @@ import 'package:appetec/features/auth/domain/repositories/auth_repository.dart';
 import 'package:appetec/features/auth/domain/usecases/user_login.dart';
 import 'package:appetec/features/auth/domain/usecases/user_register.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initOnboading();
 }
 
 void _initAuth() {
@@ -46,4 +48,8 @@ void _initAuth() {
       userLogout: serviceLocator(),
     ),
   );
+}
+
+void _initOnboading() {
+  serviceLocator.registerLazySingleton(() => OnboardingBloc());
 }

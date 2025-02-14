@@ -5,7 +5,7 @@ class DeviceData {
   DeviceData({required this.deviceId, required this.serialId});
 }
 
-class UserData {
+class OnboardingData {
   int? age;
   String? gender;
   double? height;
@@ -19,7 +19,7 @@ class UserData {
   int? deviceUsageLimit;
   List<String>? appPermissions;
 
-  UserData({
+  OnboardingData({
     this.age,
     this.gender,
     this.height,
