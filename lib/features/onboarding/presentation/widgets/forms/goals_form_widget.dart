@@ -115,6 +115,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
     return BlocListener<OnboardingBloc, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingDataGoalsUpdate) {
+          WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
           context.pushNamed(AppRouteConstants.SELECT_DEVICE);
         }
       },
@@ -175,6 +176,11 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
                 options: sleepOptions,
                 selectedOption: selectedSleepGoal,
                 onChange: onSleepChange,
+                onToggle: () {
+                  setState(() {
+                    isSleepOptionsOpen = false;
+                  });
+                },
               ),
             ),
             Positioned(
@@ -219,6 +225,11 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
                 options: mindfulnessOptions,
                 selectedOption: selectedMindfulnessGoal,
                 onChange: onMindfulnessChange,
+                onToggle: () {
+                  setState(() {
+                    isMindfulnessDropdownOpen = false;
+                  });
+                },
               ),
             ),
             Positioned(
@@ -263,6 +274,11 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
                 options: activityOptions,
                 selectedOption: selectedActivityGoal,
                 onChange: onActivityChange,
+                onToggle: () {
+                  setState(() {
+                    isActivityDropdownOpen = false;
+                  });
+                },
               ),
             ),
             Positioned(
@@ -307,6 +323,11 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
                 options: goalsOptions,
                 selectedOption: selectedPhysicalGoal,
                 onChange: onGoalChange,
+                onToggle: () {
+                  setState(() {
+                    isGoalsDropdownOpen = false;
+                  });
+                },
               ),
             ),
             Positioned(

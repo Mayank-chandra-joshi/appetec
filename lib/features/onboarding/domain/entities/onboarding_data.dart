@@ -26,7 +26,7 @@ class OnboardingData {
   String? sleepGoal;
   DeviceData? deviceData;
   DeviceMetaData? deviceMetaData;
-  int? deviceUsageLimit;
+  double? deviceUsageLimit;
   List<String>? appPermissions;
 
   OnboardingData({

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppPermissionCard extends StatelessWidget {
   final String image, title, desc;
   final bool value;
-  final void Function(bool)? setValue;
+  final void Function() setValue;
 
   const AppPermissionCard(
       {super.key,
@@ -62,7 +62,10 @@ class AppPermissionCard extends StatelessWidget {
               scaleX: 1.05,
               child: Switch(
                 value: value,
-                onChanged: setValue,
+                onChanged: (value) {
+                  if (!value) return;
+                  setValue();
+                },
                 activeColor: darkGreen,
                 inactiveTrackColor: Colors.transparent,
                 activeTrackColor: lightGreen,

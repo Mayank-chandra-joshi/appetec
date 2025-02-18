@@ -18,6 +18,14 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             weight: event.weight ?? previousOnboardingData.weight,
             dietPreference:
                 event.dietPreference ?? previousOnboardingData.dietPreference,
+            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
+            activityGoal:
+                event.activityGoal ?? previousOnboardingData.activityGoal,
+            physicalGoal:
+                event.physicalGoal ?? previousOnboardingData.physicalGoal,
+            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit ??
+                previousOnboardingData.deviceUsageLimit,
           ),
         ));
       },

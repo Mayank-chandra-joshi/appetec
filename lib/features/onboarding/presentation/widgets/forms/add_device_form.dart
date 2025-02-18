@@ -46,6 +46,7 @@ class _AddDeviceFormState extends State<AddDeviceForm> {
     return BlocConsumer<OnboardingBloc, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingPairDeviceUpdate) {
+          WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
           context.pushNamed(AppRouteConstants.GET_APP_PERMISSIONS);
         }
       },
@@ -116,7 +117,11 @@ class _AddDeviceFormState extends State<AddDeviceForm> {
                   width: 120,
                   child: TextButton(
                     onPressed: () {
-                      context.pushNamed(AppRouteConstants.GET_APP_PERMISSIONS);
+                      context.read<OnboardingBloc>().add(
+                            UpdateOnboardingPairDeviceEvent(
+                              deviceData: null,
+                            ),
+                          );
                     },
                     child: Text(
                       "Skip >",

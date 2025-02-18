@@ -119,7 +119,7 @@ class AppRouter {
           return MaterialPage(child: ErrorPage());
         },
         redirect: (context, state) {
-          // return '/onboarding/devices';
+          // return '/onboarding/get/app_permissions';
 
           // context.goNamed(AppRouteConstants.ADD_DEVICE,
           //     pathParameters: {'id': "dfhskjnse"});

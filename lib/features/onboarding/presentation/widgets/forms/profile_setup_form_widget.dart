@@ -116,6 +116,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
     return BlocListener<OnboardingBloc, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingDataProfileDetailsUpdate) {
+          WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
           context.pushNamed(AppRouteConstants.SET_GOALS);
         }
       },
@@ -203,6 +204,11 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                       options: dieteryPrefrencesOptions,
                       selectedOption: selectedDieteryPrefrences,
                       onChange: onDieteryPreferenceChange,
+                      onToggle: () {
+                        setState(() {
+                          isDieteryPrefrenceDropdownOpen = false;
+                        });
+                      },
                     ),
                   ),
                   Positioned(
@@ -248,6 +254,11 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                       options: genderOptions,
                       selectedOption: selectedGender,
                       onChange: onGenderChange,
+                      onToggle: () {
+                        setState(() {
+                          isGenderDropdownOpen = false;
+                        });
+                      },
                     ),
                   ),
                   Positioned(

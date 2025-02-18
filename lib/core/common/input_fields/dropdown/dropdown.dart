@@ -38,6 +38,7 @@ class Dropdown extends StatelessWidget {
             options: options,
             selectedOption: selectedOption,
             onChange: onChange,
+            onToggle: onToggle,
           ),
         ),
         DropdownTrigger(

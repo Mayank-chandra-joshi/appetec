@@ -7,6 +7,7 @@ class DropdownList extends StatelessWidget {
   final List<String> options;
   final String selectedOption;
   final void Function(String) onChange;
+  final VoidCallback onToggle;
 
   const DropdownList({
     super.key,
@@ -14,6 +15,7 @@ class DropdownList extends StatelessWidget {
     required this.options,
     required this.selectedOption,
     required this.onChange,
+    required this.onToggle,
   });
 
   @override
@@ -62,7 +64,10 @@ class DropdownList extends StatelessWidget {
                           backgroundColor:
                               selectedOption == option ? lightPurple : white,
                         ),
-                        onPressed: () => onChange(option),
+                        onPressed: () {
+                          onChange(option);
+                          onToggle();
+                        },
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(

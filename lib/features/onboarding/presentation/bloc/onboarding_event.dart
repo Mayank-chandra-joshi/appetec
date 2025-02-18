@@ -10,93 +10,156 @@ final class UpdateOnboardingProfileDetailsEvent implements OnboardingEvent {
   final double? weight;
   final String? gender;
   final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
+  final List<String>? appPermissions;
+
   UpdateOnboardingProfileDetailsEvent({
     this.age,
     this.gender,
     this.height,
     this.weight,
     this.dietPreference,
-  });
-}
-
-final class UpdateOnboardingGoalsEvent
-    extends UpdateOnboardingProfileDetailsEvent {
-  final String? mindGoal;
-  final String? activityGoal;
-  final String? physicalGoal;
-  final String? sleepGoal;
-  final int? deviceUsageLimit;
-
-  UpdateOnboardingGoalsEvent({
-    super.age,
-    super.gender,
-    super.height,
-    super.weight,
-    super.dietPreference,
     this.mindGoal,
     this.activityGoal,
     this.physicalGoal,
     this.sleepGoal,
     this.deviceUsageLimit,
-  });
-}
-
-final class UpdateOnboardingSelectedDeviceEvent
-    extends UpdateOnboardingGoalsEvent {
-  final DeviceMetaData? deviceMetaData;
-
-  UpdateOnboardingSelectedDeviceEvent({
-    super.age,
-    super.gender,
-    super.height,
-    super.weight,
-    super.dietPreference,
-    super.mindGoal,
-    super.activityGoal,
-    super.physicalGoal,
-    super.sleepGoal,
-    super.deviceUsageLimit,
     this.deviceMetaData,
-  });
-}
-
-final class UpdateOnboardingPairDeviceEvent
-    extends UpdateOnboardingSelectedDeviceEvent {
-  final DeviceData? deviceData;
-
-  UpdateOnboardingPairDeviceEvent({
-    super.age,
-    super.gender,
-    super.height,
-    super.weight,
-    super.dietPreference,
-    super.mindGoal,
-    super.activityGoal,
-    super.physicalGoal,
-    super.sleepGoal,
-    super.deviceUsageLimit,
-    super.deviceMetaData,
+    this.appPermissions,
     this.deviceData,
   });
 }
 
-final class UpdateOnboardingAppPermissionsEvent
-    extends UpdateOnboardingPairDeviceEvent {
+final class UpdateOnboardingGoalsEvent implements OnboardingEvent {
+  final int? age;
+  final double? height;
+  final double? weight;
+  final String? gender;
+  final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
+  final List<String>? appPermissions;
+
+  UpdateOnboardingGoalsEvent({
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.dietPreference,
+    this.mindGoal,
+    this.activityGoal,
+    this.physicalGoal,
+    this.sleepGoal,
+    this.deviceUsageLimit,
+    this.deviceMetaData,
+    this.appPermissions,
+    this.deviceData,
+  });
+}
+
+final class UpdateOnboardingSelectedDeviceEvent implements OnboardingEvent {
+  final int? age;
+  final double? height;
+  final double? weight;
+  final String? gender;
+  final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
+  final List<String>? appPermissions;
+
+  UpdateOnboardingSelectedDeviceEvent({
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.dietPreference,
+    this.mindGoal,
+    this.activityGoal,
+    this.physicalGoal,
+    this.sleepGoal,
+    this.deviceUsageLimit,
+    this.deviceMetaData,
+    this.deviceData,
+    this.appPermissions,
+  });
+}
+
+final class UpdateOnboardingPairDeviceEvent implements OnboardingEvent {
+  final int? age;
+  final double? height;
+  final double? weight;
+  final String? gender;
+  final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
+  final List<String>? appPermissions;
+
+  UpdateOnboardingPairDeviceEvent({
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.dietPreference,
+    this.mindGoal,
+    this.activityGoal,
+    this.physicalGoal,
+    this.sleepGoal,
+    this.deviceUsageLimit,
+    this.deviceMetaData,
+    this.deviceData,
+    this.appPermissions,
+  });
+}
+
+final class UpdateOnboardingAppPermissionsEvent implements OnboardingEvent {
+  final int? age;
+  final double? height;
+  final double? weight;
+  final String? gender;
+  final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
   final List<String>? appPermissions;
 
   UpdateOnboardingAppPermissionsEvent({
-    super.age,
-    super.gender,
-    super.height,
-    super.weight,
-    super.dietPreference,
-    super.mindGoal,
-    super.activityGoal,
-    super.physicalGoal,
-    super.sleepGoal,
-    super.deviceUsageLimit,
-    super.deviceMetaData,
-    super.deviceData,
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.dietPreference,
+    this.mindGoal,
+    this.activityGoal,
+    this.physicalGoal,
+    this.sleepGoal,
+    this.deviceUsageLimit,
+    this.deviceMetaData,
+    this.deviceData,
     this.appPermissions,
   });
 }

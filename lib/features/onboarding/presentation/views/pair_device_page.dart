@@ -13,28 +13,26 @@ class PairDevicePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              color: white,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Enter your device",
-                      style: GoogleFonts.exo(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w600,
-                        color: black,
-                      ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            color: white,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Enter your device",
+                    style: GoogleFonts.exo(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w600,
+                      color: black,
                     ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    AddDeviceForm(),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  AddDeviceForm(),
+                ],
               ),
             ),
           ),
