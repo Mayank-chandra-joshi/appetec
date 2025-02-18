@@ -7,12 +7,14 @@ class NumberInputWidget extends StatelessWidget {
   final TextEditingController controller;
   final String? placeholder;
   final String? Function(String?)? validator;
+  final bool isFloatingPoint;
 
   const NumberInputWidget({
     super.key,
     required this.controller,
     this.placeholder,
     this.validator,
+    this.isFloatingPoint = false,
   });
 
   @override
@@ -20,9 +22,9 @@ class NumberInputWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-      ],
+      inputFormatters: isFloatingPoint
+          ? [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))]
+          : [FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.number,
       style: GoogleFonts.exo2(
         color: black,

@@ -1,5 +1,6 @@
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/home/presentation/view/home_page.dart';
+import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:appetec/features/splash/splash_page.dart';
 import 'package:appetec/router/path_constants.dart';
 import 'package:appetec/router/transitions/scale_page_transition.dart';
@@ -24,7 +25,7 @@ class AppRouter {
   ];
 
   // Only those who have not completed thier profile
-  static const List<String> partiallyProtectedRotues = [
+  static const List<String> onboardingRoutes = [
     AppRouteConstants.PROFILE_SETUP,
     AppRouteConstants.SET_GOALS,
     AppRouteConstants.ADD_DEVICE,
@@ -92,10 +93,13 @@ class AppRouter {
           GoRoute(
             name: AppRouteConstants.ADD_DEVICE,
             path: '/onboarding/pair/device/:id',
-            pageBuilder: (context, state) => RightSlideIn(
-              key: state.pageKey,
-              child: PairDevicePage(),
-            ),
+            pageBuilder: (context, state) {
+              final String deviceId = state.pathParameters['id']!;
+              return RightSlideIn(
+                key: state.pageKey,
+                child: PairDevicePage(deviceId: deviceId),
+              );
+            },
           ),
           GoRoute(
             name: AppRouteConstants.GET_APP_PERMISSIONS,
@@ -115,21 +119,33 @@ class AppRouter {
           return MaterialPage(child: ErrorPage());
         },
         redirect: (context, state) {
+          // return '/onboarding/devices';
+
+          // context.goNamed(AppRouteConstants.ADD_DEVICE,
+          //     pathParameters: {'id': "dfhskjnse"});
+
           final authState = context.read<AuthBloc>().state;
+          final onboardingState = context.read<OnboardingBloc>().state;
 
-          // if ((authState is AuthInitial || authState is AuthFailure) &&
-          //     state.uri.toString() != '/auth/register') {
-          //   return '/auth/login';
-          // }
+          if (authState.userDetails != null &&
+              unprotectedRoutes.contains(state.name)) return '/';
 
-          // if (state.uri.toString() == '/onboarding/profile' &&
-          //     authState.isAccountCompleted) {
-          //   return '/';
-          // }
+          if (authState.userDetails == null &&
+              state.uri.toString() != '/auth/register') {
+            return '/auth/login';
+          }
 
-          // if (!authState.isAccountCompleted && authState is AuthSuccess) {
-          //   return '/onboarding/prorfile';
-          // }
+          if (state.uri.toString() == '/onboarding/profile' &&
+              authState.userDetails!.isAccountCompleted) {
+            return '/';
+          }
+
+          if (!authState.userDetails!.isAccountCompleted) {
+            if (onboardingState.onboardingData.age == null) {
+              return '/onboarding/profile';
+            }
+            // else if(onboardingState.onboardingData.age != null) return ''
+          }
 
           return null;
         },

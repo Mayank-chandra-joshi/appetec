@@ -22,8 +22,8 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
         UserLoginParams(email: event.email, password: event.password),
       );
 
-      res.fold((l) => emit(AuthFailure(l.message)),
-          (r) => emit(AuthSuccess(r, r.isAccountCompleted)));
+      res.fold(
+          (l) => emit(AuthFailure(l.message)), (r) => emit(AuthSuccess(r)));
     });
 
     on<AuthRegister>((event, emit) async {
@@ -57,10 +57,10 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     } else if (stateType == 'AuthInitial') {
       return AuthInitial();
     } else if (stateType == 'AuthSuccess') {
-      final userJson = json['user'] as Map<String, dynamic>?;
+      final userJson = json['userDetails'] as Map<String, dynamic>?;
       if (userJson == null) return AuthInitial();
       final user = User.fromJson(userJson);
-      return AuthSuccess(user, user.isAccountCompleted);
+      return AuthSuccess(user);
     } else if (stateType == 'AuthFailure') {
       final message = json['message'] as String?;
       return AuthFailure(message ?? '');
@@ -76,7 +76,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     } else if (state is AuthSuccess) {
       return {
         'state': 'AuthSuccess',
-        'user': state.user.toJson(),
+        'userDetails': state.userDetails.toJson(),
       };
     } else if (state is AuthFailure) {
       return {

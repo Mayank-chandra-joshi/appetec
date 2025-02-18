@@ -4,5 +4,5 @@ import 'package:fpdart/fpdart.dart';
 import '../entities/device.dart';
 
 abstract class DeviceRepository {
-  Future<Either<Failure, Devices>> fetchDevices();
+  Future<Either<Failure, Devices>> fetchDevices(int page);
 }

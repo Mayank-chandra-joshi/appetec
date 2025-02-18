@@ -1,3 +1,4 @@
+import 'package:appetec/core/common/snackbar/custom_snackbar.dart';
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/auth/presentation/widgets/forms/register_user_form_widget.dart';
@@ -21,15 +22,12 @@ class RegisterPage extends StatelessWidget {
             }
 
             if (state is AuthSuccessMessage) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Verification link send")),
-              );
+              customSnackbar(
+                  context, 'Verification link send', darkGreen, white);
             }
 
             if (state is AuthFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              customSnackbar(context, state.message, redColor, white);
             }
           },
           child: Container(

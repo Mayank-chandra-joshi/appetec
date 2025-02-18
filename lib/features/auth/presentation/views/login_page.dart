@@ -1,3 +1,4 @@
+import 'package:appetec/core/common/snackbar/custom_snackbar.dart';
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/auth/presentation/widgets/forms/login_form_widget.dart';
@@ -21,13 +22,13 @@ class LoginPage extends StatelessWidget {
             }
 
             if (state is AuthSuccess) {
+              customSnackbar(
+                  context, "Logged in successfully", darkGreen, white);
               context.goNamed(AppRouteConstants.PROFILE_SETUP);
             }
 
             if (state is AuthFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              customSnackbar(context, state.message, redColor, white);
             }
           },
           child: Container(

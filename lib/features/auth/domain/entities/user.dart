@@ -2,15 +2,14 @@ class User {
   final String id;
   final String name;
   final String email;
-  final int age;
-  final String gender;
-  final int height;
-  final int weight;
-  final int deviceUsageLimit;
-  final String dietPreference;
+  final int? age;
+  final String? gender;
+  final int? height;
+  final int? weight;
+  final int? deviceUsageLimit;
+  final String? dietPreference;
   final bool isEmailVerified;
   final bool isAccountCompleted;
-  final bool isDeleted;
   final List<String> appPermissions;
   final List<Map<String, String>> goals;
 
@@ -26,7 +25,6 @@ class User {
     required this.dietPreference,
     required this.isEmailVerified,
     required this.isAccountCompleted,
-    required this.isDeleted,
     required this.appPermissions,
     required this.goals,
   });
@@ -37,15 +35,14 @@ class User {
       id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
-      age: json['age'] as int,
-      gender: json['gender'] as String,
-      height: json['height'] as int,
-      weight: json['weight'] as int,
-      deviceUsageLimit: json['deviceUsageLimit'] as int,
-      dietPreference: json['dietPreference'] as String,
+      age: json['age'],
+      gender: json['gender'],
+      height: json['height'],
+      weight: json['weight'],
+      deviceUsageLimit: json['deviceUsageLimit'],
+      dietPreference: json['dietPreference'],
       isEmailVerified: json['isEmailVerified'] as bool,
       isAccountCompleted: json['isAccountCompleted'] as bool,
-      isDeleted: json['isDeleted'] as bool,
       appPermissions: (json['appPermissions'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -70,7 +67,6 @@ class User {
       'dietPreference': dietPreference,
       'isEmailVerified': isEmailVerified,
       'isAccountCompleted': isAccountCompleted,
-      'isDeleted': isDeleted,
       'appPermissions': appPermissions,
       'goals': goals,
     };

@@ -1,8 +1,9 @@
 import 'package:appetec/features/onboarding/domain/entities/device.dart';
+import 'package:flutter/material.dart';
 
 class DevicesModel extends Devices {
   @override
-  List<DeviceModel> devices;
+  final List<DeviceModel> devices;
 
   DevicesModel({
     required super.totalDevices,
@@ -15,7 +16,10 @@ class DevicesModel extends Devices {
       totalDevices: map["total"],
       currentDevicesCount: map["nbHits"],
       devices: List<DeviceModel>.from(
-          map["devices"].map((device) => DeviceModel.fromJson(device))),
+        map["devices"].map((device) {
+          return DeviceModel.fromJson(device);
+        }),
+      ),
     );
   }
 }
@@ -31,10 +35,11 @@ class DeviceModel extends Device {
 
   factory DeviceModel.fromJson(Map<String, dynamic> map) {
     return DeviceModel(
-        id: map['id'],
-        name: map['name'],
-        description: map['description'],
-        thumbnailUrl: map['thumbnailUrl'],
-        version: map['version']);
+      id: map['id'],
+      name: map['name'],
+      description: map['description'],
+      thumbnailUrl: map['thumbnailUrl'],
+      version: (map['version'] as num).toDouble(),
+    );
   }
 }

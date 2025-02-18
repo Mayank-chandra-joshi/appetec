@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:appetec/core/constants/backend/url.dart';
 import 'package:appetec/features/auth/data/models/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -49,12 +50,18 @@ class AuthRemoteSourceImp implements AuthRemoteSource {
       return UserModel.fromJson(jsonData);
     } on DioException catch (e) {
       if (e.response != null) {
-        throw "${e.response?.data["message"]}";
+        final responseData = e.response?.data;
+        if (responseData is Map<String, dynamic> &&
+            responseData.containsKey("message")) {
+          throw "${responseData["message"]}";
+        } else {
+          throw "An unexpected error occurred.";
+        }
       } else {
         throw "${e.message}";
       }
     } catch (e) {
-      throw Exception("An unexpected error occurred: $e");
+      throw "An unexpected error occurred: $e";
     }
   }
 
@@ -115,8 +122,14 @@ class AuthRemoteSourceImp implements AuthRemoteSource {
       await storage.deleteAll();
 
       return "Logged out successfully";
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception("${e.response?.data["message"]}");
+      } else {
+        throw Exception("${e.message}");
+      }
     } catch (e) {
-      throw "Exception: $e";
+      throw Exception("An unexpected error occurred: $e");
     }
   }
 }

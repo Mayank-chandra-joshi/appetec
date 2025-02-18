@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract interface class DeviceRemoteSource {
-  Future<DevicesModel> getAllDevices();
+  Future<DevicesModel> getAllDevices(int page);
 }
 
 class DeviceRemoteSourceImp implements DeviceRemoteSource {
@@ -12,12 +12,12 @@ class DeviceRemoteSourceImp implements DeviceRemoteSource {
   final storage = FlutterSecureStorage();
 
   @override
-  Future<DevicesModel> getAllDevices() async {
+  Future<DevicesModel> getAllDevices(int page) async {
     try {
       String? token = await storage.read(key: 'accessToken');
 
       final response = await dio.get(
-        "${BackendURL.url}/api/devices",
+        "${BackendURL.url}/api/devices?page=$page",
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',

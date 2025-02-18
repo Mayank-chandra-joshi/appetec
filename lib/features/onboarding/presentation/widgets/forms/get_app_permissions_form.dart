@@ -1,7 +1,9 @@
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
-import 'package:appetec/core/common/cards/app_permission_card.dart';
+import 'package:appetec/features/onboarding/presentation/widgets/cards/app_permission_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class GetAppPermissionFrom extends StatefulWidget {
   const GetAppPermissionFrom({super.key});
@@ -18,12 +20,14 @@ class _GetAppPermissionFromState extends State<GetAppPermissionFrom> {
 
   void Function(bool)? getAppleHealthPermission(value) {
     setState(() {
+      HapticFeedback.mediumImpact();
       appleHealthPermission = value;
     });
   }
 
   void Function(bool)? getGoogleHealthPermission(value) {
     setState(() {
+      HapticFeedback.mediumImpact();
       googleHealthPermission = value;
     });
   }
@@ -69,7 +73,9 @@ class _GetAppPermissionFromState extends State<GetAppPermissionFrom> {
               children: [
                 SimpleBtn(
                   text: "Back",
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                   width: 120,
                   color: white,
                   bgcolor: primaryPurple,

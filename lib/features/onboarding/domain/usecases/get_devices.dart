@@ -9,7 +9,7 @@ class GetDevices {
 
   GetDevices(this.repository);
 
-  Future<Either<Failure, Devices>> call() async {
-    return await repository.fetchDevices();
+  Future<Either<Failure, Devices>> call(int page) async {
+    return await repository.fetchDevices(page);
   }
 }

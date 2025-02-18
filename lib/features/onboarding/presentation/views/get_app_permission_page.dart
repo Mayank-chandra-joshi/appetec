@@ -1,5 +1,5 @@
 import 'package:appetec/core/theme/colors.dart';
-import 'package:appetec/utils/degreeToRadians.dart';
+import 'package:appetec/core/utils/degreeToRadians.dart';
 import 'package:appetec/features/onboarding/presentation/widgets/forms/get_app_permissions_form.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

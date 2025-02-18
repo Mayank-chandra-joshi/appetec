@@ -7,30 +7,123 @@ part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc() : super(OnboardingInitial()) {
-    on<UpdateOnboardingEvent>((event, emit) {
-      final previousOnboardingData = state.onboardingData;
-      emit(OnboadingDataUpdate(
-        onboardingData: OnboardingData(
-          age: event.age ?? previousOnboardingData.age,
-          gender: event.gender ?? previousOnboardingData.gender,
-          height: event.height ?? previousOnboardingData.height,
-          weight: event.weight ?? previousOnboardingData.weight,
-          dietPreference:
-              event.dietPreference ?? previousOnboardingData.dietPreference,
-          mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
-          activityGoal:
-              event.activityGoal ?? previousOnboardingData.activityGoal,
-          physicalGoal:
-              event.physicalGoal ?? previousOnboardingData.physicalGoal,
-          sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
-          deviceData: event.deviceData ?? previousOnboardingData.deviceData,
-          deviceUsageLimit:
-              event.deviceUsageLimit ?? previousOnboardingData.deviceUsageLimit,
-          appPermissions:
-              event.appPermissions ?? previousOnboardingData.appPermissions,
-        ),
-      ));
-    });
+    on<UpdateOnboardingProfileDetailsEvent>(
+      (event, emit) {
+        final previousOnboardingData = state.onboardingData;
+        emit(OnboardingDataProfileDetailsUpdate(
+          onboardingData: OnboardingData(
+            age: event.age ?? previousOnboardingData.age,
+            gender: event.gender ?? previousOnboardingData.gender,
+            height: event.height ?? previousOnboardingData.height,
+            weight: event.weight ?? previousOnboardingData.weight,
+            dietPreference:
+                event.dietPreference ?? previousOnboardingData.dietPreference,
+          ),
+        ));
+      },
+    );
+    on<UpdateOnboardingGoalsEvent>(
+      (event, emit) {
+        final previousOnboardingData = state.onboardingData;
+        emit(OnboardingDataGoalsUpdate(
+          onboardingData: OnboardingData(
+            age: event.age ?? previousOnboardingData.age,
+            gender: event.gender ?? previousOnboardingData.gender,
+            height: event.height ?? previousOnboardingData.height,
+            weight: event.weight ?? previousOnboardingData.weight,
+            dietPreference:
+                event.dietPreference ?? previousOnboardingData.dietPreference,
+            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
+            activityGoal:
+                event.activityGoal ?? previousOnboardingData.activityGoal,
+            physicalGoal:
+                event.physicalGoal ?? previousOnboardingData.physicalGoal,
+            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit ??
+                previousOnboardingData.deviceUsageLimit,
+          ),
+        ));
+      },
+    );
+    on<UpdateOnboardingSelectedDeviceEvent>(
+      (event, emit) {
+        final previousOnboardingData = state.onboardingData;
+        emit(OnboardingSelectedDeviceUpdate(
+          onboardingData: OnboardingData(
+            age: event.age ?? previousOnboardingData.age,
+            gender: event.gender ?? previousOnboardingData.gender,
+            height: event.height ?? previousOnboardingData.height,
+            weight: event.weight ?? previousOnboardingData.weight,
+            dietPreference:
+                event.dietPreference ?? previousOnboardingData.dietPreference,
+            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
+            activityGoal:
+                event.activityGoal ?? previousOnboardingData.activityGoal,
+            physicalGoal:
+                event.physicalGoal ?? previousOnboardingData.physicalGoal,
+            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit ??
+                previousOnboardingData.deviceUsageLimit,
+            deviceMetaData:
+                event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
+          ),
+        ));
+      },
+    );
+    on<UpdateOnboardingPairDeviceEvent>(
+      (event, emit) {
+        final previousOnboardingData = state.onboardingData;
+        emit(OnboardingPairDeviceUpdate(
+          onboardingData: OnboardingData(
+            age: event.age ?? previousOnboardingData.age,
+            gender: event.gender ?? previousOnboardingData.gender,
+            height: event.height ?? previousOnboardingData.height,
+            weight: event.weight ?? previousOnboardingData.weight,
+            dietPreference:
+                event.dietPreference ?? previousOnboardingData.dietPreference,
+            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
+            activityGoal:
+                event.activityGoal ?? previousOnboardingData.activityGoal,
+            physicalGoal:
+                event.physicalGoal ?? previousOnboardingData.physicalGoal,
+            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit ??
+                previousOnboardingData.deviceUsageLimit,
+            deviceMetaData:
+                event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
+            deviceData: event.deviceData ?? previousOnboardingData.deviceData,
+          ),
+        ));
+      },
+    );
+    on<UpdateOnboardingAppPermissionsEvent>(
+      (event, emit) {
+        final previousOnboardingData = state.onboardingData;
+        emit(OnboardingAppPermissionDataUpdate(
+          onboardingData: OnboardingData(
+            age: event.age ?? previousOnboardingData.age,
+            gender: event.gender ?? previousOnboardingData.gender,
+            height: event.height ?? previousOnboardingData.height,
+            weight: event.weight ?? previousOnboardingData.weight,
+            dietPreference:
+                event.dietPreference ?? previousOnboardingData.dietPreference,
+            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
+            activityGoal:
+                event.activityGoal ?? previousOnboardingData.activityGoal,
+            physicalGoal:
+                event.physicalGoal ?? previousOnboardingData.physicalGoal,
+            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit ??
+                previousOnboardingData.deviceUsageLimit,
+            deviceMetaData:
+                event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
+            deviceData: event.deviceData ?? previousOnboardingData.deviceData,
+            appPermissions:
+                event.appPermissions ?? previousOnboardingData.appPermissions,
+          ),
+        ));
+      },
+    );
   }
   @override
   void onChange(Change<OnboardingState> change) {

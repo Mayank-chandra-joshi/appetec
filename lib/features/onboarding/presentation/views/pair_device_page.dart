@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PairDevicePage extends StatelessWidget {
-  const PairDevicePage({super.key});
+  final String deviceId;
+  const PairDevicePage({super.key, required this.deviceId});
 
   @override
   Widget build(BuildContext context) {
