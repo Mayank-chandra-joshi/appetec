@@ -9,23 +9,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc() : super(OnboardingInitial()) {
     on<UpdateOnboardingProfileDetailsEvent>(
       (event, emit) {
-        final previousOnboardingData = state.onboardingData;
         emit(OnboardingDataProfileDetailsUpdate(
           onboardingData: OnboardingData(
-            age: event.age ?? previousOnboardingData.age,
-            gender: event.gender ?? previousOnboardingData.gender,
-            height: event.height ?? previousOnboardingData.height,
-            weight: event.weight ?? previousOnboardingData.weight,
-            dietPreference:
-                event.dietPreference ?? previousOnboardingData.dietPreference,
-            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
-            activityGoal:
-                event.activityGoal ?? previousOnboardingData.activityGoal,
-            physicalGoal:
-                event.physicalGoal ?? previousOnboardingData.physicalGoal,
-            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
-            deviceUsageLimit: event.deviceUsageLimit ??
-                previousOnboardingData.deviceUsageLimit,
+            age: event.age,
+            gender: event.gender,
+            height: event.height,
+            weight: event.weight,
+            dietPreference: event.dietPreference,
           ),
         ));
       },
@@ -41,14 +31,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             weight: event.weight ?? previousOnboardingData.weight,
             dietPreference:
                 event.dietPreference ?? previousOnboardingData.dietPreference,
-            mindGoal: event.mindGoal ?? previousOnboardingData.mindGoal,
-            activityGoal:
-                event.activityGoal ?? previousOnboardingData.activityGoal,
-            physicalGoal:
-                event.physicalGoal ?? previousOnboardingData.physicalGoal,
-            sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
-            deviceUsageLimit: event.deviceUsageLimit ??
-                previousOnboardingData.deviceUsageLimit,
+            mindGoal: event.mindGoal,
+            activityGoal: event.activityGoal,
+            physicalGoal: event.physicalGoal,
+            sleepGoal: event.sleepGoal,
+            deviceUsageLimit: event.deviceUsageLimit,
           ),
         ));
       },
@@ -72,8 +59,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             sleepGoal: event.sleepGoal ?? previousOnboardingData.sleepGoal,
             deviceUsageLimit: event.deviceUsageLimit ??
                 previousOnboardingData.deviceUsageLimit,
-            deviceMetaData:
-                event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
+            deviceMetaData: event.deviceMetaData,
           ),
         ));
       },
@@ -99,7 +85,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
                 previousOnboardingData.deviceUsageLimit,
             deviceMetaData:
                 event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
-            deviceData: event.deviceData ?? previousOnboardingData.deviceData,
+            deviceData: event.deviceData,
           ),
         ));
       },
@@ -126,9 +112,16 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             deviceMetaData:
                 event.deviceMetaData ?? previousOnboardingData.deviceMetaData,
             deviceData: event.deviceData ?? previousOnboardingData.deviceData,
-            appPermissions:
-                event.appPermissions ?? previousOnboardingData.appPermissions,
+            appPermissions: event.appPermissions,
           ),
+        ));
+      },
+    );
+
+    on<ClearOnboardingDataEvent>(
+      (event, emit) {
+        emit(OnboardingDataClear(
+          onboardingData: OnboardingData(),
         ));
       },
     );

@@ -48,3 +48,11 @@ final class OnboardingAppPermissionDataUpdate extends OnboardingState {
   OnboardingAppPermissionDataUpdate({required this.onboardingData})
       : super(onboardingData: onboardingData);
 }
+
+final class OnboardingDataClear extends OnboardingState {
+  @override
+  final OnboardingData onboardingData;
+
+  OnboardingDataClear({required this.onboardingData})
+      : super(onboardingData: onboardingData);
+}

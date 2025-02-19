@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:appetec/core/constants/backend/url.dart';
+import 'package:appetec/features/auth/data/models/onboarding_model.dart';
 import 'package:appetec/features/auth/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,21 @@ abstract interface class AuthRemoteSource {
   });
 
   Future<String> logoutUser();
+
+  Future<UserUpdateModel> userProfileSetup({
+    required int age,
+    required String gender,
+    required double height,
+    required int weight,
+    required String dietPreference,
+    required String mindGoal,
+    required String activityGoal,
+    required String physicalGoal,
+    required String sleepGoal,
+    required DeviceDataModel? deviceData,
+    required double deviceUsageLimit,
+    required List<String> appPermissions,
+  });
 }
 
 class AuthRemoteSourceImp implements AuthRemoteSource {
@@ -122,6 +138,69 @@ class AuthRemoteSourceImp implements AuthRemoteSource {
       await storage.deleteAll();
 
       return "Logged out successfully";
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception("${e.response?.data["message"]}");
+      } else {
+        throw Exception("${e.message}");
+      }
+    } catch (e) {
+      throw Exception("An unexpected error occurred: $e");
+    }
+  }
+
+  @override
+  Future<UserUpdateModel> userProfileSetup({
+    required int age,
+    required String gender,
+    required double height,
+    required int weight,
+    required String dietPreference,
+    required String mindGoal,
+    required String activityGoal,
+    required String physicalGoal,
+    required String sleepGoal,
+    required DeviceDataModel? deviceData,
+    required double deviceUsageLimit,
+    required List<String> appPermissions,
+  }) async {
+    final storage = FlutterSecureStorage();
+    String? token = await storage.read(key: 'accessToken');
+    final dio = Dio();
+
+    debugPrint(weight.toString());
+
+    try {
+      final response = await dio.put(
+        "${BackendURL.url}/api/profile/setup_profile",
+        data: {
+          "age": age,
+          "gender": gender,
+          "height": height,
+          "weight": weight,
+          "diet_preference": dietPreference,
+          "mind_goal": mindGoal,
+          "activity_goal": activityGoal,
+          "physical_goal": physicalGoal,
+          "sleep_goal": sleepGoal,
+          "deviceData": deviceData != null
+              ? {
+                  "deviceId": deviceData.deviceId,
+                  "serialId": deviceData.serialId,
+                }
+              : null,
+          "deviceUsageLimit": deviceUsageLimit,
+          "app_permissions": appPermissions,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      final Map<String, dynamic> jsonData = response.data["user"];
+      return UserUpdateModel.fromJson(jsonData);
     } on DioException catch (e) {
       if (e.response != null) {
         throw Exception("${e.response?.data["message"]}");

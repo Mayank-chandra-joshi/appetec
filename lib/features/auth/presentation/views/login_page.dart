@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
             if (state is AuthSuccess) {
               customSnackbar(
                   context, "Logged in successfully", darkGreen, white);
-              context.goNamed(AppRouteConstants.PROFILE_SETUP);
+              context.goNamed(AppRouteConstants.HOME);
             }
 
             if (state is AuthFailure) {

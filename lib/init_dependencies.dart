@@ -2,6 +2,7 @@ import 'package:appetec/features/auth/data/repositories/auth_repository_impl.dar
 import 'package:appetec/features/auth/data/sources/auth_remote_source.dart';
 import 'package:appetec/features/auth/domain/repositories/auth_repository.dart';
 import 'package:appetec/features/auth/domain/usecases/user_login.dart';
+import 'package:appetec/features/auth/domain/usecases/user_profile_setup.dart';
 import 'package:appetec/features/auth/domain/usecases/user_register.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -41,11 +42,18 @@ void _initAuth() {
     ),
   );
 
+  serviceLocator.registerFactory(
+    () => UserProfileSetup(
+      serviceLocator(),
+    ),
+  );
+
   serviceLocator.registerLazySingleton(
     () => AuthBloc(
       userLogin: serviceLocator(),
       userRegister: serviceLocator(),
       userLogout: serviceLocator(),
+      userProfileSetup: serviceLocator(),
     ),
   );
 }

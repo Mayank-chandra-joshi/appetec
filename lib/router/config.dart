@@ -24,15 +24,6 @@ class AppRouter {
     AppRouteConstants.REGISTER_USER,
   ];
 
-  // Only those who have not completed thier profile
-  static const List<String> onboardingRoutes = [
-    AppRouteConstants.PROFILE_SETUP,
-    AppRouteConstants.SET_GOALS,
-    AppRouteConstants.ADD_DEVICE,
-    AppRouteConstants.SELECT_DEVICE,
-    AppRouteConstants.GET_APP_PERMISSIONS
-  ];
-
   GoRouter get router => GoRouter(
         initialLocation: '/splash',
         routes: [
@@ -127,20 +118,25 @@ class AppRouter {
           final authState = context.read<AuthBloc>().state;
           final onboardingState = context.read<OnboardingBloc>().state;
 
-          if (authState.userDetails != null &&
-              unprotectedRoutes.contains(state.name)) return '/';
+          // if (authState.isAuthenticated &&
+          //     state.uri.path.contains("/onboarding")) {
+          //   debugPrint('/onboadring');
+          //   return '/';
+          // }
 
-          if (authState.userDetails == null &&
+          if (!authState.isAuthenticated &&
               state.uri.toString() != '/auth/register') {
             return '/auth/login';
           }
 
           if (state.uri.toString() == '/onboarding/profile' &&
+              authState.userDetails != null &&
               authState.userDetails!.isAccountCompleted) {
             return '/';
           }
 
-          if (!authState.userDetails!.isAccountCompleted) {
+          if (authState.userDetails != null &&
+              !authState.userDetails!.isAccountCompleted) {
             if (onboardingState.onboardingData.age == null) {
               return '/onboarding/profile';
             }

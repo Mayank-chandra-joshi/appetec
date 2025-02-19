@@ -117,6 +117,7 @@ class _AddDeviceFormState extends State<AddDeviceForm> {
                   width: 120,
                   child: TextButton(
                     onPressed: () {
+                      debugPrint("called");
                       context.read<OnboardingBloc>().add(
                             UpdateOnboardingPairDeviceEvent(
                               deviceData: null,

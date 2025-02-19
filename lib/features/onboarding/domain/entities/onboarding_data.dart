@@ -18,7 +18,7 @@ class OnboardingData {
   int? age;
   String? gender;
   double? height;
-  double? weight;
+  int? weight;
   String? dietPreference;
   String? mindGoal;
   String? activityGoal;

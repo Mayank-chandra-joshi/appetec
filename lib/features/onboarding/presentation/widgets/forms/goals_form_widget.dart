@@ -1,5 +1,6 @@
 import 'package:appetec/core/common/input_fields/dropdown/dropdown.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_list.dart';
+import 'package:appetec/core/common/input_fields/dropdown/dropdown_options.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_trigger.dart';
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -26,60 +27,96 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
   bool isActivityDropdownOpen = false;
   bool isMindfulnessDropdownOpen = false;
   bool isSleepOptionsOpen = false;
+  bool isDeviceUsageOptionsOpen = false;
   bool isFromValidationFailed = false;
 
-  final List<String> goalsOptions = [
-    "To loose 5kgs and less",
-    "To loose 10kgs",
-    "To loose 20kgs",
-    "To loose more than 20kgs",
-    "Other"
+  final List<DropdownOption<String>> goalsOptions = [
+    DropdownOption(
+        label: "To lose 5kgs and less", value: "To lose 5kgs and less"),
+    DropdownOption(label: "To lose 10kgs", value: "To lose 10kgs"),
+    DropdownOption(label: "To lose 20kgs", value: "To lose 20kgs"),
+    DropdownOption(
+        label: "To lose more than 20kgs", value: "To lose more than 20kgs"),
+    DropdownOption(label: "Other", value: "Other"),
   ];
 
-  final List<String> activityOptions = [
-    "Burn 100 kcal",
-    "Burn 500 kcal",
-    "Burn more than 500 kcal",
+  final List<DropdownOption<String>> activityOptions = [
+    DropdownOption(label: "Burn 100 kcal", value: "Burn 100 kcal"),
+    DropdownOption(label: "Burn 500 kcal", value: "Burn 500 kcal"),
+    DropdownOption(
+        label: "Burn more than 500 kcal", value: "Burn more than 500 kcal"),
   ];
 
-  final List<String> mindfulnessOptions = [
-    "Avoiding Distractions",
-    "Practice Mindful eating",
-    "Balancing the Food and Activity"
+  final List<DropdownOption<String>> mindfulnessOptions = [
+    DropdownOption(
+        label: "Avoiding Distractions", value: "Avoiding Distractions"),
+    DropdownOption(
+        label: "Practice Mindful Eating", value: "Practice Mindful Eating"),
+    DropdownOption(
+        label: "Balancing the Food and Activity",
+        value: "Balancing the Food and Activity"),
   ];
 
-  final List<String> sleepOptions = ["6 hours", "7hours", "8hours"];
+  final List<DropdownOption<String>> sleepOptions = [
+    DropdownOption(label: "6 hours", value: "6 hours"),
+    DropdownOption(label: "7 hours", value: "7 hours"),
+    DropdownOption(label: "8 hours", value: "8 hours"),
+  ];
+
+  final List<DropdownOption<double>> deviceUsageLimitOptions = [
+    DropdownOption(label: "2 hours", value: 2.0),
+    DropdownOption(label: "2.5 hours", value: 2.5),
+    DropdownOption(label: "3 hours", value: 3.0),
+  ];
 
   String selectedPhysicalGoal = "";
+  String selectedPhysicalGoalLabel = "";
   String selectedActivityGoal = "";
+  String selectedActivityGoalLabel = "";
   String selectedMindfulnessGoal = "";
+  String selectedMindfulnessGoalLabel = "";
   String selectedSleepGoal = "";
+  String selectedSleepGoalLabel = "";
+  double? selectedDeviceUsageLimit;
+  String selectedDeviceUsageLimitLabel = "";
 
-  void onGoalChange(String? newValue) {
-    if (newValue == null) return;
+  void onGoalChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
-      selectedPhysicalGoal = newValue;
+      selectedPhysicalGoal = newLabel;
+      selectedPhysicalGoalLabel = newValue;
     });
   }
 
-  void onActivityChange(String? newValue) {
-    if (newValue == null) return;
+  void onActivityChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
       selectedActivityGoal = newValue;
+      selectedActivityGoalLabel = newLabel;
     });
   }
 
-  void onMindfulnessChange(String? newValue) {
-    if (newValue == null) return;
+  void onMindfulnessChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
       selectedMindfulnessGoal = newValue;
+      selectedMindfulnessGoalLabel = newLabel;
     });
   }
 
-  void onSleepChange(String? newValue) {
-    if (newValue == null) return;
+  void onSleepChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
       selectedSleepGoal = newValue;
+      selectedSleepGoalLabel = newLabel;
+    });
+  }
+
+  void onDeviceUsageLimitChange(String? newLabel, double? newValue) {
+    if (newValue == null || newLabel == null) return;
+    setState(() {
+      selectedDeviceUsageLimit = newValue;
+      selectedDeviceUsageLimitLabel = newLabel;
     });
   }
 
@@ -87,7 +124,8 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
     if (selectedPhysicalGoal.isEmpty ||
         selectedActivityGoal.isEmpty ||
         selectedMindfulnessGoal.isEmpty ||
-        selectedSleepGoal.isEmpty) {
+        selectedSleepGoal.isEmpty ||
+        selectedDeviceUsageLimit == null) {
       setState(() {
         isFromValidationFailed = true;
       });
@@ -104,6 +142,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
             activityGoal: selectedActivityGoal,
             mindGoal: selectedMindfulnessGoal,
             sleepGoal: selectedSleepGoal,
+            deviceUsageLimit: selectedDeviceUsageLimit,
           ),
         );
   }
@@ -152,6 +191,57 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               ),
             ),
             Positioned(
+              top: 280,
+              child: isFromValidationFailed &&
+                      selectedDeviceUsageLimitLabel.isEmpty
+                  ? Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Please select device usage goal",
+                        style: GoogleFonts.exo(
+                          fontSize: 12,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
+            ),
+            Positioned(
+              top: 240,
+              left: 0,
+              right: 0,
+              child: DropdownList(
+                isOpen: isDeviceUsageOptionsOpen,
+                options: deviceUsageLimitOptions,
+                selectedOption: selectedDeviceUsageLimit,
+                onChange: onDeviceUsageLimitChange,
+                onToggle: () {
+                  setState(() {
+                    isDeviceUsageOptionsOpen = false;
+                  });
+                },
+              ),
+            ),
+            Positioned(
+              top: 240, // Move it down
+              left: 0,
+              right: 0,
+              child: DropdownTrigger(
+                placeholder: "Device usage",
+                selectedLabel: selectedDeviceUsageLimitLabel,
+                selectedOption: selectedDeviceUsageLimit,
+                isOpen: isDeviceUsageOptionsOpen,
+                onToggle: () {
+                  setState(() {
+                    isDeviceUsageOptionsOpen = !isDeviceUsageOptionsOpen;
+                  });
+                },
+                formValidationFailed: isFromValidationFailed,
+                validationFailMessage: "Please select device usage goal",
+              ),
+            ),
+            Positioned(
               top: 220,
               child: isFromValidationFailed && selectedSleepGoal.isEmpty
                   ? Container(
@@ -189,6 +279,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               right: 0,
               child: DropdownTrigger(
                 placeholder: "Sleep",
+                selectedLabel: selectedSleepGoalLabel,
                 selectedOption: selectedSleepGoal,
                 isOpen: isSleepOptionsOpen,
                 onToggle: () {
@@ -238,6 +329,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               right: 0,
               child: DropdownTrigger(
                 placeholder: "Mindfulness",
+                selectedLabel: selectedMindfulnessGoalLabel,
                 selectedOption: selectedMindfulnessGoal,
                 isOpen: isMindfulnessDropdownOpen,
                 onToggle: () {
@@ -287,6 +379,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               right: 0,
               child: DropdownTrigger(
                 placeholder: "Movement/Activity",
+                selectedLabel: selectedActivityGoalLabel,
                 selectedOption: selectedActivityGoal,
                 isOpen: isActivityDropdownOpen,
                 onToggle: () {
@@ -336,6 +429,7 @@ class GoalsSetupFormState extends State<GoalsSetupForm> {
               right: 0,
               child: DropdownTrigger(
                   placeholder: "Physical",
+                  selectedLabel: selectedPhysicalGoalLabel,
                   selectedOption: selectedPhysicalGoal,
                   isOpen: isGoalsDropdownOpen,
                   onToggle: () {

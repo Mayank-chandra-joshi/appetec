@@ -1,12 +1,14 @@
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_list.dart';
+import 'package:appetec/core/common/input_fields/dropdown/dropdown_options.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_trigger.dart';
 import 'package:flutter/material.dart';
 
-class Dropdown extends StatelessWidget {
+class Dropdown<T> extends StatelessWidget {
   final bool isOpen;
-  final List<String> options;
-  final String selectedOption;
-  final void Function(String) onChange;
+  final List<DropdownOption<T>> options;
+  final String selectedLabel;
+  final T selectedOption;
+  final void Function(String, T) onChange;
   final String placeholder;
   final VoidCallback onToggle;
   final bool formValidationFailed;
@@ -16,6 +18,7 @@ class Dropdown extends StatelessWidget {
     super.key,
     required this.isOpen,
     required this.options,
+    required this.selectedLabel,
     required this.selectedOption,
     required this.onChange,
     required this.placeholder,
@@ -33,7 +36,7 @@ class Dropdown extends StatelessWidget {
           top: 0,
           left: 0,
           right: 0,
-          child: DropdownList(
+          child: DropdownList<T>(
             isOpen: isOpen,
             options: options,
             selectedOption: selectedOption,
@@ -44,6 +47,7 @@ class Dropdown extends StatelessWidget {
         DropdownTrigger(
           placeholder: placeholder,
           selectedOption: selectedOption,
+          selectedLabel: selectedLabel,
           isOpen: isOpen,
           onToggle: onToggle,
           formValidationFailed: formValidationFailed,

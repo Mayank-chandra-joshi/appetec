@@ -1,12 +1,13 @@
+import 'package:appetec/core/common/input_fields/dropdown/dropdown_options.dart';
 import 'package:appetec/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DropdownList extends StatelessWidget {
+class DropdownList<T> extends StatelessWidget {
   final bool isOpen;
-  final List<String> options;
-  final String selectedOption;
-  final void Function(String) onChange;
+  final List<DropdownOption<T>> options;
+  final T selectedOption;
+  final void Function(String, T) onChange;
   final VoidCallback onToggle;
 
   const DropdownList({
@@ -23,7 +24,7 @@ class DropdownList extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 35.0),
       decoration: BoxDecoration(
-        color: selectedOption == options[0] ? lightPurple : white,
+        color: selectedOption == options[0].value ? lightPurple : white,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
           color: primaryPurple,
@@ -33,12 +34,7 @@ class DropdownList extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        height:
-            isOpen ? (options.length * 48.0) : 0, // Height animates properly
-        decoration: BoxDecoration(
-            // color: white,
-            // borderRadius: BorderRadius.circular(20),
-            ),
+        height: isOpen ? (options.length * 48.0) : 0,
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20),
@@ -61,11 +57,12 @@ class DropdownList extends StatelessWidget {
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.zero,
                           ),
-                          backgroundColor:
-                              selectedOption == option ? lightPurple : white,
+                          backgroundColor: selectedOption == option.value
+                              ? lightPurple
+                              : white,
                         ),
                         onPressed: () {
-                          onChange(option);
+                          onChange(option.label, option.value);
                           onToggle();
                         },
                         child: Align(
@@ -73,7 +70,7 @@ class DropdownList extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                             child: Text(
-                              option,
+                              option.label,
                               style: GoogleFonts.exo(
                                 fontSize: 14,
                                 color: black,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DropdownTrigger extends StatelessWidget {
-  final String selectedOption;
+  final String selectedLabel;
+  final dynamic selectedOption;
   final String placeholder;
   final bool isOpen;
   final VoidCallback onToggle;
@@ -12,6 +13,7 @@ class DropdownTrigger extends StatelessWidget {
 
   const DropdownTrigger({
     super.key,
+    required this.selectedLabel,
     required this.selectedOption,
     required this.placeholder,
     required this.isOpen,
@@ -31,7 +33,9 @@ class DropdownTrigger extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100),
                 side: BorderSide(
-                  color: formValidationFailed && selectedOption.isEmpty
+                  color: formValidationFailed &&
+                          (selectedOption == null ||
+                              selectedOption.toString().isEmpty)
                       ? redColor
                       : (isOpen ? primaryPurple : black),
                   width: 2,
@@ -42,16 +46,30 @@ class DropdownTrigger extends StatelessWidget {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: onToggle,
-            child: Align(
+            child: Stack(
               alignment: Alignment.centerLeft,
-              child: Text(
-                selectedOption.isEmpty ? placeholder : selectedOption,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.exo(
-                  color: black,
-                  fontSize: 16,
-                ),
-              ),
+              children: [
+                Positioned(
+                    right: 0,
+                    child: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      size: 24,
+                      color: isOpen ? ThemeColors.primaryPurple : black,
+                    )),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    (selectedLabel.toString().isEmpty)
+                        ? placeholder
+                        : selectedLabel.toString(),
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.exo(
+                      color: black,
+                      fontSize: 16,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ),

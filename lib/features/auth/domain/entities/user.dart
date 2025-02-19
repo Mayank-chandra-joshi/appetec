@@ -4,9 +4,9 @@ class User {
   final String email;
   final int? age;
   final String? gender;
-  final int? height;
+  final double? height;
   final int? weight;
-  final int? deviceUsageLimit;
+  final double? deviceUsageLimit;
   final String? dietPreference;
   final bool isEmailVerified;
   final bool isAccountCompleted;

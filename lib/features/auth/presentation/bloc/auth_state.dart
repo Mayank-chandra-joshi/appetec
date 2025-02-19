@@ -33,3 +33,11 @@ final class AuthFailure extends AuthState {
 
   const AuthFailure(this.message) : super(isAuthenticated: false);
 }
+
+final class AuthProfileUpdateFailure extends AuthState {
+  final User userDetails;
+  final String message;
+
+  const AuthProfileUpdateFailure(this.userDetails, this.message)
+      : super(isAuthenticated: true, userDetails: userDetails);
+}

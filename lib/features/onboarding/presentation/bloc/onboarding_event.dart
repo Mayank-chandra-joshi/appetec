@@ -7,7 +7,7 @@ sealed class OnboardingEvent {
 final class UpdateOnboardingProfileDetailsEvent implements OnboardingEvent {
   final int? age;
   final double? height;
-  final double? weight;
+  final int? weight;
   final String? gender;
   final String? dietPreference;
   final String? mindGoal;
@@ -39,7 +39,7 @@ final class UpdateOnboardingProfileDetailsEvent implements OnboardingEvent {
 final class UpdateOnboardingGoalsEvent implements OnboardingEvent {
   final int? age;
   final double? height;
-  final double? weight;
+  final int? weight;
   final String? gender;
   final String? dietPreference;
   final String? mindGoal;
@@ -71,7 +71,7 @@ final class UpdateOnboardingGoalsEvent implements OnboardingEvent {
 final class UpdateOnboardingSelectedDeviceEvent implements OnboardingEvent {
   final int? age;
   final double? height;
-  final double? weight;
+  final int? weight;
   final String? gender;
   final String? dietPreference;
   final String? mindGoal;
@@ -103,7 +103,7 @@ final class UpdateOnboardingSelectedDeviceEvent implements OnboardingEvent {
 final class UpdateOnboardingPairDeviceEvent implements OnboardingEvent {
   final int? age;
   final double? height;
-  final double? weight;
+  final int? weight;
   final String? gender;
   final String? dietPreference;
   final String? mindGoal;
@@ -135,7 +135,7 @@ final class UpdateOnboardingPairDeviceEvent implements OnboardingEvent {
 final class UpdateOnboardingAppPermissionsEvent implements OnboardingEvent {
   final int? age;
   final double? height;
-  final double? weight;
+  final int? weight;
   final String? gender;
   final String? dietPreference;
   final String? mindGoal;
@@ -148,6 +148,38 @@ final class UpdateOnboardingAppPermissionsEvent implements OnboardingEvent {
   final List<String>? appPermissions;
 
   UpdateOnboardingAppPermissionsEvent({
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.dietPreference,
+    this.mindGoal,
+    this.activityGoal,
+    this.physicalGoal,
+    this.sleepGoal,
+    this.deviceUsageLimit,
+    this.deviceMetaData,
+    this.deviceData,
+    this.appPermissions,
+  });
+}
+
+final class ClearOnboardingDataEvent implements OnboardingEvent {
+  final int? age;
+  final double? height;
+  final int? weight;
+  final String? gender;
+  final String? dietPreference;
+  final String? mindGoal;
+  final String? activityGoal;
+  final String? physicalGoal;
+  final String? sleepGoal;
+  final double? deviceUsageLimit;
+  final DeviceMetaData? deviceMetaData;
+  final DeviceData? deviceData;
+  final List<String>? appPermissions;
+
+  ClearOnboardingDataEvent({
     this.age,
     this.gender,
     this.height,

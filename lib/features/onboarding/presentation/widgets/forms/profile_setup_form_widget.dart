@@ -1,4 +1,5 @@
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_list.dart';
+import 'package:appetec/core/common/input_fields/dropdown/dropdown_options.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_trigger.dart';
 import 'package:appetec/core/theme/colors.dart';
 // import 'package:appetec/widgets/input_fields/dropdown_widget.dart';
@@ -31,16 +32,24 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
-  final List<String> genderOptions = ["Male", "Female", "Others"];
-  final List<String> dieteryPrefrencesOptions = [
-    "Vegan",
-    "Vegetarian",
-    "Non Vegetarian",
-    "Others"
+
+  final List<DropdownOption<String>> genderOptions = [
+    DropdownOption(label: "Male", value: "male"),
+    DropdownOption(label: "Female", value: "female"),
+    DropdownOption(label: "Others", value: "others"),
+  ];
+
+  final List<DropdownOption<String>> dieteryPreferencesOptions = [
+    DropdownOption(label: "Vegan", value: "vegan"),
+    DropdownOption(label: "Vegetarian", value: "veg"),
+    DropdownOption(label: "Non Vegetarian", value: "non-veg"),
+    DropdownOption(label: "Others", value: "others"),
   ];
 
   String selectedGender = "";
+  String selectedGenderLabel = "";
   String selectedDieteryPrefrences = "";
+  String selectedDieteryPrefrencesLabel = "";
   bool isFromValidationFailed = false;
   bool isGenderDropdownOpen = false;
   bool isDieteryPrefrenceDropdownOpen = false;
@@ -72,17 +81,19 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
     return null;
   }
 
-  void onGenderChange(String? newValue) {
-    if (newValue == null) return;
+  void onGenderChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
       selectedGender = newValue;
+      selectedGenderLabel = newLabel;
     });
   }
 
-  void onDieteryPreferenceChange(String? newValue) {
-    if (newValue == null) return;
+  void onDieteryPreferenceChange(String? newLabel, String? newValue) {
+    if (newValue == null || newLabel == null) return;
     setState(() {
       selectedDieteryPrefrences = newValue;
+      selectedDieteryPrefrencesLabel = newLabel;
     });
   }
 
@@ -102,7 +113,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
             UpdateOnboardingProfileDetailsEvent(
                 age: int.tryParse(_ageController.text.trim()),
                 height: double.tryParse(_heightController.text.trim()),
-                weight: double.tryParse(_weightController.text.trim()),
+                weight: int.tryParse(_weightController.text.trim()),
                 gender: selectedGender,
                 dietPreference: selectedDieteryPrefrences),
           );
@@ -142,7 +153,6 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                   controller: _weightController,
                   placeholder: "Weight",
                   validator: validateWeight,
-                  isFloatingPoint: true,
                 ),
               ],
             ),
@@ -201,7 +211,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                     right: 0,
                     child: DropdownList(
                       isOpen: isDieteryPrefrenceDropdownOpen,
-                      options: dieteryPrefrencesOptions,
+                      options: dieteryPreferencesOptions,
                       selectedOption: selectedDieteryPrefrences,
                       onChange: onDieteryPreferenceChange,
                       onToggle: () {
@@ -217,6 +227,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                     right: 0,
                     child: DropdownTrigger(
                       placeholder: "Dietery preference",
+                      selectedLabel: selectedDieteryPrefrencesLabel,
                       selectedOption: selectedDieteryPrefrences,
                       isOpen: isDieteryPrefrenceDropdownOpen,
                       onToggle: () {
@@ -267,6 +278,7 @@ class ProfileSetupFormState extends State<ProfileSetupForm> {
                     right: 0,
                     child: DropdownTrigger(
                       placeholder: "Sex",
+                      selectedLabel: selectedGenderLabel,
                       selectedOption: selectedGender,
                       isOpen: isGenderDropdownOpen,
                       onToggle: () {
