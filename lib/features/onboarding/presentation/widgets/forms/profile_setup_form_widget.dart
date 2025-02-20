@@ -2,20 +2,14 @@ import 'package:appetec/core/common/input_fields/dropdown/dropdown_list.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_options.dart';
 import 'package:appetec/core/common/input_fields/dropdown/dropdown_trigger.dart';
 import 'package:appetec/core/theme/colors.dart';
-// import 'package:appetec/widgets/input_fields/dropdown_widget.dart';
-// import 'package:appetec/widgets/input_fields/dropdown_widget2.dart';
-import 'package:appetec/core/common/input_fields/dropdown_widget3.dart';
 import 'package:appetec/core/common/input_fields/number_input_widget.dart';
-import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:appetec/router/path_constants.dart';
-// import 'package:appetec/widgets/input_fields/save_dropdown_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:appetec/core/common/bottons/simple_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:flutter_portal/flutter_portal.dart';
 
 class ProfileSetupForm extends StatefulWidget {
   const ProfileSetupForm({super.key});

@@ -43,15 +43,15 @@ class NumberInputWidget extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          borderSide: BorderSide(width: 2.0, color: Colors.deepPurple),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.primaryPurple),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          borderSide: BorderSide(width: 2.0, color: Colors.red),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.redColor),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          borderSide: BorderSide(width: 2.0, color: Colors.red),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.redColor),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
         filled: true,

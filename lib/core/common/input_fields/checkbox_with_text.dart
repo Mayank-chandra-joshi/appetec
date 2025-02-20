@@ -34,13 +34,15 @@ class TextCheckBox extends StatelessWidget {
                   },
                   fillColor: WidgetStateProperty.resolveWith((states) {
                     if (!states.contains(WidgetState.selected)) {
-                      return white;
+                      return ThemeColors.white;
                     }
                     return null;
                   }),
                   side: BorderSide(
                     width: 1.5,
-                    color: state.hasError ? redColor : Colors.transparent,
+                    color: state.hasError
+                        ? ThemeColors.redColor
+                        : Colors.transparent,
                   ),
                   visualDensity: VisualDensity.compact,
                 ),
@@ -51,7 +53,7 @@ class TextCheckBox extends StatelessWidget {
                 label,
                 style: GoogleFonts.exo2(
                   fontSize: 12,
-                  color: white,
+                  color: ThemeColors.white,
                 ),
               ),
             ),

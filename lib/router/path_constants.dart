@@ -8,4 +8,7 @@ class AppRouteConstants {
   static const ADD_DEVICE = 'add_device';
   static const GET_APP_PERMISSIONS = 'get_app_permissions';
   static const HOME = 'home';
+  static const SETTINGS = 'settings';
+  static const DASHBOARD = 'dashboard';
+  static const PROFILE = 'profiel';
 }

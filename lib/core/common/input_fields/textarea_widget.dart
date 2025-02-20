@@ -23,7 +23,7 @@ class TextAreaWidget extends StatelessWidget {
       validator: validator,
       controller: controller,
       style: GoogleFonts.exo(
-        color: black,
+        color: ThemeColors.black,
         fontSize: 16,
       ),
       decoration: InputDecoration(
@@ -38,15 +38,15 @@ class TextAreaWidget extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          borderSide: BorderSide(width: 2.0, color: Colors.deepPurple),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.primaryPurple),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          borderSide: BorderSide(width: 2.0, color: Colors.red),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.redColor),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          borderSide: BorderSide(width: 2.0, color: Colors.red),
+          borderSide: BorderSide(width: 2.0, color: ThemeColors.redColor),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
         filled: true,

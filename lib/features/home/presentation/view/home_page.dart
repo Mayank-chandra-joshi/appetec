@@ -1,3 +1,4 @@
+import 'package:appetec/core/common/snackbar/custom_snackbar.dart';
 import 'package:appetec/core/theme/colors.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/router/path_constants.dart';
@@ -22,40 +23,39 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthInitial) {
-            Navigator.of(context, rootNavigator: true).pop();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Logged out successfully")),
-            );
-            context.goNamed(AppRouteConstants.HOME);
-          }
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthInitial) {
+          Navigator.of(context, rootNavigator: true).pop();
+          customSnackbar(
+            context,
+            "Logged out successfully",
+            ThemeColors.darkGreen,
+            ThemeColors.white,
+          );
+          context.goNamed(AppRouteConstants.HOME);
+        }
 
-          if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
-          }
-        },
-        child: Container(
-          color: darkGreen,
-          alignment: Alignment.center,
-          child: Text(
-            'Home Page',
-            style: GoogleFonts.exo(
-              color: white,
-              fontSize: 40,
-              fontWeight: FontWeight.w600,
-            ),
+        if (state is AuthFailure) {
+          customSnackbar(
+              context, state.message, ThemeColors.redColor, ThemeColors.white);
+        }
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+          color: ThemeColors.white,
+        ),
+        child: Text(
+          'Home Page',
+          style: GoogleFonts.exo(
+            color: ThemeColors.black,
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => logoutUser(context),
-        child: Icon(Icons.logout),
-        backgroundColor: Colors.red,
       ),
     );
   }
