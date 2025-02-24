@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778271094688",
+    "project_id": "appetec-44972",
+    "storage_bucket": "appetec-44972.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778271094688:android:85039ae063a754b41f56c5",
+        "android_client_info": {
+          "package_name": "com.example.appetec"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxKbB55tYNgG-Ezqxt1Qu2shoAwJH-Whs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

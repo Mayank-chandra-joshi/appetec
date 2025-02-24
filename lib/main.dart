@@ -1,16 +1,27 @@
+import 'package:appetec/core/utils/messaging_service.dart';
 import 'package:appetec/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:appetec/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:appetec/firebase_options.dart';
 import 'package:appetec/init_dependencies.dart';
 import 'package:appetec/router/config.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
   await initDependencies(); // Initialize dependencies
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  MessagingService().init();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
